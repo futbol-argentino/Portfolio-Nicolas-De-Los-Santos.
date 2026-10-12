@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nicolás De Los Santos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+/* Concepto: web editorial de medio deportivo. Navy y blanco para la marca personal,
+   crema + bordó + tinta para "Un Rato de Fútbol" (mini landing con identidad propia). */
+:root{
+  --navy:#0A1A3A;
+  --navy-2:#112656;
+  --ink:#060D1F;
+  --slate:#2A3142;
+  --mist:#9AA6C0;
+  --paper:#F3F4F8;
+  --white:#FFFFFF;
+  --red:#D42A3C;
+  --bordo:#7E1B2E;
+  --cream:#F1E8D4;
+  --cream-2:#E6DABB;
+  --line-d:rgba(255,255,255,.14);
+  --line-l:rgba(10,26,58,.14);
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-slab:"Alfa Slab One","Rockwell","Georgia",serif;
+  --gut:clamp(16px,4vw,48px);
+  --max:1200px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0}
+body{background:var(--navy);color:var(--white);font-family:var(--f-body);font-size:17px;line-height:1.6;overflow-x:hidden}
+img{display:block}
+a{color:inherit}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+section[id]{scroll-margin-top:64px}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.sec{padding-block:clamp(72px,10vw,128px)}
+.dark{background:var(--navy);color:var(--white)}
+.deep{background:var(--ink);color:var(--white)}
+.light{background:var(--paper);color:var(--navy)}
+.white{background:var(--white);color:var(--navy)}
+
+/* tipografía */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.eyebrow::before{content:"";width:34px;height:3px;background:currentColor}
+.h2{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.92;letter-spacing:.005em;font-size:clamp(46px,8vw,104px);margin-top:14px}
+.lead{font-size:clamp(18px,2vw,21px);max-width:62ch;opacity:.86}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,5vw,64px)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 26px;font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .25s,background .25s,color .25s,border-color .25s;background:none;color:inherit}
+.btn svg{width:20px;height:20px;transition:transform .25s}
+.btn:hover svg{transform:translateX(5px)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#b81f30;transform:translateY(-2px)}
+.btn-line{border-color:currentColor}
+.btn-line:hover{background:#fff;color:var(--navy);border-color:#fff}
+.btn-dark{background:var(--navy);color:var(--cream)}
+.btn-dark:hover{background:var(--bordo);transform:translateY(-2px)}
+
+/* íconos */
+.ico{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.socials{display:flex;flex-wrap:wrap;gap:10px}
+.soc{display:grid;place-items:center;width:46px;height:46px;border:1.5px solid var(--line-d);color:inherit;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
+.soc:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+.soc.pending{border-style:dashed;opacity:.5}
+.soc.pending:hover{background:none;border-color:var(--line-d);transform:none}
+
+/* espacios editables */
+.slot{position:relative;display:grid;place-items:center;text-align:center;padding:16px;color:var(--mist);font-family:var(--f-display);font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;background:
+  repeating-linear-gradient(135deg,rgba(154,166,192,.10) 0 10px,transparent 10px 20px),rgba(154,166,192,.06);border:1.5px dashed rgba(154,166,192,.55)}
+.slot small{display:block;font-family:var(--f-body);font-weight:500;font-size:13px;letter-spacing:.02em;text-transform:none;opacity:.85;margin-top:4px}
+.on-l .slot{color:#5A6788;border-color:rgba(10,26,58,.35);background:repeating-linear-gradient(135deg,rgba(10,26,58,.05) 0 10px,transparent 10px 20px),rgba(10,26,58,.03)}
+.todo{display:inline-block;padding:3px 10px;border:1.5px dashed currentColor;font-size:13px;font-weight:600;letter-spacing:.04em;opacity:.55}
+
+/* reveal sutil */
+.rv{opacity:1;transform:none}
+.js .rv.will:not(.in){opacity:.35;transform:translateY(22px)}
+.rv.in{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+
+/* ---------- NAV ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:rgba(6,13,31,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{white-space:nowrap;font-family:var(--f-display);font-weight:900;font-size:22px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{display:block;width:12px;height:12px;background:var(--red);transform:skewX(-14deg)}
+.menu{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.menu a{display:block;white-space:nowrap;padding:8px 10px;font-family:var(--f-display);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.78);border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.menu a:hover{color:#fff}
+.menu a.on{color:#fff;border-color:var(--red)}
+.menu a.udf::after{content:"";display:inline-block;width:7px;height:7px;margin-left:8px;background:var(--red);border-radius:50%;vertical-align:middle}
+.burger{display:none;width:46px;height:46px;border:1.5px solid var(--line-d);background:none;color:#fff;cursor:pointer;place-items:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:22px;height:2px;background:currentColor;position:relative;transition:transform .25s,background .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-7px}.burger span::after{top:7px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:1200px){
+  .burger{display:grid}
+  .menu{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);padding:8px var(--gut) 20px;border-bottom:1px solid var(--line-d);display:none}
+  .menu.open{display:flex}
+  .menu a{padding:16px 0;font-size:22px;border-bottom:1px solid var(--line-d)}
+  .menu a.on{border-color:var(--red)}
+}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding-top:calc(64px + clamp(40px,7vw,96px));padding-bottom:clamp(56px,8vw,104px);background:
+  radial-gradient(900px 500px at 85% 20%,rgba(212,42,60,.18),transparent 60%),
+  linear-gradient(180deg,var(--navy) 0%,#07122B 100%);overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg,transparent 0 120px,rgba(255,255,255,.025) 120px 240px);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,72px);align-items:center}
+.hero-name{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.84;letter-spacing:-.005em;font-size:clamp(64px,13.5vw,200px);margin-top:22px}
+.hero-name span{display:block}
+.hero-name .l2{color:transparent;-webkit-text-stroke:2px #fff;font-size:.62em;line-height:.95;margin-top:.06em}
+.hero-role{margin-top:26px;display:flex;flex-wrap:wrap;gap:6px 0;font-family:var(--f-display);font-weight:700;font-size:clamp(17px,2.2vw,24px);letter-spacing:.16em;text-transform:uppercase}
+.hero-role b{font-weight:700;padding:0 14px;border-left:3px solid var(--red)}
+.hero-role b:first-child{padding-left:0;border-left:0}
+.hero-quote{margin-top:26px;max-width:46ch;font-size:clamp(18px,2vw,22px);line-height:1.5;color:rgba(255,255,255,.88)}
+.hero-cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+.hero .socials{margin-top:34px}
+.photo{position:relative;justify-self:center;width:100%;max-width:440px}
+.photo::before{content:"";position:absolute;inset:26px -22px -22px 26px;background:var(--red);clip-path:polygon(0 0,calc(100% - 56px) 0,100% 56px,100% 100%,0 100%)}
+.photo::after{content:"";position:absolute;inset:-14px 30px 30px -14px;border:2px solid rgba(255,255,255,.35);clip-path:polygon(0 0,calc(100% - 56px) 0,100% 56px,100% 100%,0 100%)}
+.photo figure{position:relative;z-index:1;margin:0;aspect-ratio:1/1;background:var(--navy-2);clip-path:polygon(0 0,calc(100% - 56px) 0,100% 56px,100% 100%,0 100%)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.photo .slot{height:100%}
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .photo{max-width:380px;margin-top:20px;justify-self:start;margin-right:22px}
+}
+.ticker{background:var(--red);color:#fff;overflow:hidden;border-block:3px solid var(--ink)}
+.ticker-track{display:flex;width:max-content;animation:tick 38s linear infinite}
+.ticker span{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.2em;text-transform:uppercase;padding:12px 0;white-space:nowrap}
+.ticker span::after{content:"\25C6";margin:0 28px;font-size:12px;vertical-align:middle;opacity:.8}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- SOBRE MI ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,88px);align-items:start}
+.about-photo{aspect-ratio:4/5;position:relative}
+.about-photo img,.about-photo .slot{width:100%;height:100%;object-fit:cover}
+.about-photo::after{content:"";position:absolute;left:-14px;bottom:-14px;width:46%;height:46%;border-left:6px solid var(--red);border-bottom:6px solid var(--red);pointer-events:none}
+.about-text p{font-size:clamp(18px,1.9vw,21px);line-height:1.65;margin-top:20px;max-width:58ch;color:#26314D}
+.about-text p:first-of-type{margin-top:0;font-size:clamp(22px,2.6vw,30px);line-height:1.35;font-weight:600;color:var(--navy)}
+.traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
+.trait{padding:22px 20px 24px;background:var(--navy);color:#fff;position:relative;overflow:hidden;transition:transform .3s,background .3s}
+.trait:hover{transform:translateY(-6px);background:var(--bordo)}
+.trait h3{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,2.6vw,32px);letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.trait p{margin-top:10px!important;font-size:15.5px!important;line-height:1.45!important;color:rgba(255,255,255,.8)!important;font-weight:400!important}
+.trait svg{width:30px;height:30px;margin-bottom:18px;color:var(--red);stroke-width:2}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}.about-photo{max-width:420px}.traits{grid-template-columns:1fr}}
+
+/* ---------- FORMACION ---------- */
+.tl{position:relative;display:grid;gap:22px;padding-left:34px}
+.tl::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:3px;background:linear-gradient(var(--red),rgba(212,42,60,.15))}
+.tl-item{position:relative;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(18px,4vw,56px);padding:clamp(22px,3vw,36px);background:rgba(255,255,255,.04);border:1px solid var(--line-d);transition:background .3s,border-color .3s}
+.tl-item:hover{background:rgba(255,255,255,.07);border-color:rgba(212,42,60,.6)}
+.tl-item::before{content:"";position:absolute;left:-34px;top:34px;width:19px;height:19px;background:var(--ink);border:4px solid var(--red);transform:rotate(45deg) scale(.78)}
+.tl-tag{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--red)}
+.tl-item h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,4vw,48px);line-height:.95;margin-top:8px}
+.tl-item .when{margin-top:14px}
+.tl-item .desc{margin-top:12px;opacity:.8;font-size:16px}
+.facets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 28px;align-content:start}
+.facet h4{font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:14px;color:var(--mist);padding-bottom:8px;border-bottom:1px solid var(--line-d);margin-bottom:10px}
+.facet ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:16px}
+.facet li{padding-left:16px;position:relative}
+.facet li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;background:var(--red)}
+@media(max-width:860px){.tl-item{grid-template-columns:1fr}.facets{grid-template-columns:1fr}}
+
+/* ---------- EXPERIENCIA ---------- */
+.xp-list{display:grid;gap:22px}
+.xp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);background:#fff;border:1px solid var(--line-l);box-shadow:0 1px 0 var(--line-l);transition:transform .3s,box-shadow .3s}
+.xp:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(10,26,58,.5)}
+.xp-media{min-height:240px;position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:6px;background:var(--paper)}
+.xp-media .slot{min-height:100px}
+.xp-media .slot:first-child{grid-column:1/-1;min-height:150px}
+.xp-body{padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:10px}
+.xp-meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--bordo)}
+.xp-body h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,3.6vw,44px);line-height:.95}
+.xp-body .role{font-weight:700;font-size:17px}
+.xp-body p{color:#3A4562;font-size:16.5px}
+.xp-body .prod{font-size:15px;border-top:1px solid var(--line-l);padding-top:12px;margin-top:auto}
+.xp-body .prod b{font-family:var(--f-display);letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--bordo);margin-right:8px}
+.xp-body .btn{align-self:flex-start;padding:12px 20px;font-size:16px}
+@media(max-width:860px){.xp{grid-template-columns:1fr}}
+
+/* ---------- PROYECTOS ---------- */
+.pj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pj{position:relative;overflow:hidden;min-height:380px;background:var(--navy-2);display:flex;align-items:flex-end;border:1px solid var(--line-d)}
+.pj.wide{grid-column:span 2}
+.pj .slot{position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pj:hover .slot{transform:scale(1.06)}
+.pj::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,13,31,0) 25%,rgba(6,13,31,.92) 100%);transition:background .4s}
+.pj:hover::after{background:linear-gradient(180deg,rgba(126,27,46,.25) 0%,rgba(6,13,31,.96) 100%)}
+.pj-in{position:relative;z-index:2;padding:26px;width:100%}
+.pj-in h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,3.4vw,42px);line-height:.95}
+.pj-in p{font-size:15.5px;margin-top:10px;max-height:0;opacity:0;overflow:hidden;transition:max-height .45s ease,opacity .45s ease;color:rgba(255,255,255,.88)}
+.pj:hover .pj-in p,.pj:focus-within .pj-in p{max-height:140px;opacity:1}
+.pj-in a{display:inline-flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:16px;text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:3px}
+.pj-in a svg{width:18px;height:18px;transition:transform .25s}
+.pj-in a:hover svg{transform:translateX(6px)}
+.pj-kicker{display:inline-block;background:var(--red);font-family:var(--f-display);font-weight:800;letter-spacing:.16em;font-size:13px;text-transform:uppercase;padding:3px 10px;margin-bottom:12px}
+@media(hover:none){.pj-in p{max-height:140px;opacity:1}}
+@media(max-width:900px){.pj-grid{grid-template-columns:1fr 1fr}.pj.wide{grid-column:span 2}}
+@media(max-width:600px){.pj-grid{grid-template-columns:1fr}.pj.wide{grid-column:auto}.pj{min-height:340px}}
+
+/* ---------- UN RATO DE FUTBOL ---------- */
+.udf{--c-navy:#0E1B3D;--c-ink:#101216;--c-bordo:#8A1C30;--c-cream:#F1E8D4;--c-cream2:#E6DABB;background:
+  repeating-linear-gradient(90deg,var(--c-cream) 0 90px,#EDE3CB 90px 180px);color:var(--c-ink);position:relative}
+.udf-mast{background:var(--c-navy);color:var(--c-cream);position:relative;overflow:hidden;padding-block:clamp(72px,10vw,132px)}
+.udf-mast::before{content:"";position:absolute;right:-12%;top:50%;width:min(760px,90vw);aspect-ratio:1;transform:translateY(-50%);border-radius:50%;border:3px solid rgba(241,232,212,.12);box-shadow:inset 0 0 0 90px transparent}
+.udf-mast::after{content:"";position:absolute;right:-12%;top:0;bottom:0;width:min(760px,90vw);background:linear-gradient(90deg,transparent calc(50% - 1.5px),rgba(241,232,212,.12) calc(50% - 1.5px) calc(50% + 1.5px),transparent calc(50% + 1.5px))}
+.udf-mast .wrap{position:relative;z-index:1}
+.udf-flag{display:inline-flex;align-items:center;gap:10px;background:var(--c-bordo);color:var(--c-cream);padding:7px 16px;font-family:var(--f-display);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:15px}
+.udf-title{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;line-height:.92;font-size:clamp(50px,11vw,168px);margin-top:26px;letter-spacing:-.01em}
+.udf-title span{display:block;color:var(--c-cream)}
+.udf-title span+span{color:transparent;-webkit-text-stroke:2px var(--c-cream)}
+.udf-sub{margin-top:24px;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,2.8vw,32px);letter-spacing:.14em;text-transform:uppercase;display:flex;flex-wrap:wrap;gap:6px 0}
+.udf-sub b{font-weight:800;padding:0 16px;border-left:3px solid var(--c-bordo);color:var(--c-cream)}
+.udf-sub b:first-child{padding-left:0;border-left:0}
+.udf-mast .socials{margin-top:34px}
+.udf-mast .soc{border-color:rgba(241,232,212,.3);color:var(--c-cream)}
+.udf-mast .soc:hover{background:var(--c-bordo);border-color:var(--c-bordo)}
+.u-block{padding-block:clamp(56px,8vw,96px)}
+.u-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:34px;border-bottom:4px solid var(--c-ink);padding-bottom:14px}
+.u-head h3{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,60px);line-height:1}
+.u-head span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--c-bordo)}
+.udf .slot{color:#5E5A4C;border-color:rgba(16,18,22,.4);background:repeating-linear-gradient(135deg,rgba(16,18,22,.05) 0 10px,transparent 10px 20px),rgba(16,18,22,.03)}
+.udf .todo{color:var(--c-ink)}
+.u-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
+.u-intro p{font-size:clamp(18px,1.9vw,21px);max-width:56ch;margin-top:18px}
+.u-intro p:first-child{margin-top:0;font-size:clamp(24px,3vw,36px);font-weight:600;line-height:1.25}
+.u-photo{aspect-ratio:4/3;position:relative;box-shadow:12px 12px 0 var(--c-bordo)}
+.u-photo .slot,.u-photo img{width:100%;height:100%;object-fit:cover}
+@media(max-width:860px){.u-intro{grid-template-columns:1fr}}
+.do-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:3px solid var(--c-ink);background:var(--c-ink)}
+.do{background:var(--c-cream);padding:28px 24px 30px;display:flex;flex-direction:column;gap:12px;border-right:3px solid var(--c-ink);transition:background .3s,color .3s;min-height:280px}
+.do:last-child{border-right:0}
+.do:hover{background:var(--c-navy);color:var(--c-cream)}
+.do svg{width:38px;height:38px;color:var(--c-bordo);stroke-width:2}
+.do:hover svg{color:var(--c-cream)}
+.do h4{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.4vw,30px);line-height:1}
+.do p{font-size:16px;margin-top:auto}
+@media(max-width:1000px){.do-grid{grid-template-columns:1fr 1fr}.do:nth-child(2){border-right:0}.do:nth-child(-n+2){border-bottom:3px solid var(--c-ink)}}
+@media(max-width:560px){.do-grid{grid-template-columns:1fr}.do{border-right:0;border-bottom:3px solid var(--c-ink);min-height:0}.do:last-child{border-bottom:0}}
+.role-wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
+.role-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.role-list li{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--c-ink);color:var(--c-cream);font-family:var(--f-display);font-weight:800;font-size:clamp(18px,1.8vw,22px);letter-spacing:.1em;text-transform:uppercase;transition:background .25s,transform .25s}
+.role-list li:hover{background:var(--c-bordo);transform:translateX(5px)}
+.role-list li::before{content:"";width:10px;height:10px;background:var(--c-bordo);flex:none;transform:rotate(45deg)}
+.role-list li:hover::before{background:var(--c-cream)}
+.role-ph{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.role-ph .slot{aspect-ratio:1/1}
+.role-ph .slot:first-child{grid-column:1/-1;aspect-ratio:16/9}
+@media(max-width:900px){.role-wrap{grid-template-columns:1fr}}
+@media(max-width:480px){.role-list{grid-template-columns:1fr}}
+.iv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.iv{background:var(--c-cream);border:3px solid var(--c-ink);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.iv:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--c-bordo)}
+.iv .slot{aspect-ratio:4/3;border-width:0 0 3px 0;border-style:solid;border-color:var(--c-ink)}
+.iv img{aspect-ratio:4/3;width:100%;object-fit:cover;border-bottom:3px solid var(--c-ink)}
+.iv-b{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.iv-b h4{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;font-size:26px;line-height:1.05}
+.iv-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--c-bordo)}
+.iv-b p{font-size:15.5px}
+.iv-b .btn{margin-top:auto;align-self:flex-start;padding:11px 18px;font-size:15px}
+@media(max-width:900px){.iv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.iv-grid{grid-template-columns:1fr}}
+.cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.tk{display:grid;grid-template-columns:minmax(0,1fr) 128px;background:var(--c-cream);border:3px solid var(--c-ink);position:relative;transition:transform .3s}
+.tk:hover{transform:rotate(-.6deg) translateY(-3px)}
+.tk-main{padding:22px 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;border-right:3px dashed var(--c-ink)}
+.tk-main .full{grid-column:1/-1}
+.tk dt{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--c-bordo)}
+.tk dd{margin:2px 0 0;font-family:var(--f-display);font-weight:800;font-size:clamp(20px,2.2vw,26px);line-height:1.1;text-transform:uppercase}
+.tk dd.ph{opacity:.5;font-size:18px}
+.tk-stub{background:var(--c-bordo);color:var(--c-cream);display:grid;place-items:center;text-align:center;padding:12px}
+.tk-stub dd{font-size:22px}
+.tk-stub dt{color:var(--c-cream);opacity:.8}
+.tk::before,.tk::after{content:"";position:absolute;right:calc(128px - 13px);width:20px;height:20px;border-radius:50%;background:#EDE3CB;border:3px solid var(--c-ink)}
+.tk::before{top:-13px;clip-path:inset(50% 0 0 0)}
+.tk::after{bottom:-13px;clip-path:inset(0 0 50% 0)}
+@media(max-width:900px){.cv-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.tk{grid-template-columns:1fr}.tk-main{border-right:0;border-bottom:3px dashed var(--c-ink)}.tk::before,.tk::after{display:none}.tk-stub{padding:14px}}
+.cv-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.cv-photos .slot{aspect-ratio:4/3}
+@media(max-width:700px){.cv-photos{grid-template-columns:1fr 1fr}}
+.rs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.rs{display:flex;flex-direction:column;gap:6px;padding:26px 22px;background:var(--c-navy);color:var(--c-cream);text-decoration:none;position:relative;overflow:hidden;transition:transform .3s,background .3s}
+.rs:hover{background:var(--c-bordo);transform:translateY(-6px)}
+.rs svg.ico{width:54px;height:54px;stroke-width:1.5;margin-bottom:34px}
+.rs b{font-family:var(--f-slab);font-weight:400;font-size:28px;text-transform:uppercase;line-height:1}
+.rs span{font-size:16px;opacity:.85;word-break:break-word}
+.rs em{font-style:normal;display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:15px}
+.rs em svg{width:18px;height:18px;transition:transform .25s}
+.rs:hover em svg{transform:translateX(6px)}
+@media(max-width:1000px){.rs-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rs-grid{grid-template-columns:1fr}}
+
+/* ---------- HABILIDADES ---------- */
+.sk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.sk{background:#fff;border:1px solid var(--line-l);padding:30px 26px 32px;position:relative;transition:transform .3s,box-shadow .3s}
+.sk:hover{transform:translateY(-6px);box-shadow:0 22px 40px -26px rgba(10,26,58,.55)}
+.sk::before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:var(--red);transform-origin:left;transform:scaleX(.28);transition:transform .5s}
+.sk:hover::before{transform:scaleX(1)}
+.sk h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(34px,4vw,48px);line-height:.95;letter-spacing:.02em}
+.sk ul{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:0}
+.sk li{padding:13px 0;border-top:1px solid var(--line-l);font-size:17.5px;font-weight:500;display:flex;align-items:center;gap:12px}
+.sk li::before{content:"";width:9px;height:9px;background:var(--navy);flex:none;transform:rotate(45deg);transition:background .2s}
+.sk li:hover::before{background:var(--red)}
+@media(max-width:900px){.sk-grid{grid-template-columns:1fr}}
+
+/* ---------- PORTFOLIO ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.fbtn{font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:16px;padding:11px 20px;background:none;color:#fff;border:1.5px solid var(--line-d);cursor:pointer;transition:background .2s,border-color .2s}
+.fbtn:hover{border-color:#fff}
+.fbtn[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:dense;gap:12px}
+.gi{position:relative;min-height:190px;overflow:hidden;background:var(--navy-2);animation:pop .5s ease both}
+.gi.tall{grid-row:span 2}.gi.wide{grid-column:span 2}
+.gi .slot{position:absolute;inset:0;transition:transform .6s}
+.gi:hover .slot{transform:scale(1.05)}
+.gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gi-tag{position:absolute;left:0;bottom:0;z-index:2;background:var(--red);font-family:var(--f-display);font-weight:800;letter-spacing:.16em;font-size:13px;text-transform:uppercase;padding:5px 12px}
+.gi[hidden]{display:none}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+@media(max-width:900px){.gal{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.gal{grid-template-columns:1fr}.gi.wide{grid-column:auto}}
+.gal-note{margin-top:20px;font-size:15px;color:var(--mist)}
+
+/* ---------- EVOLUCION ---------- */
+.ev{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative}
+.ev::before{content:"";position:absolute;left:0;right:0;top:19px;height:4px;background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 66%,var(--red) 100%)}
+.ev-i{position:relative;padding:52px 22px 0 0}
+.ev-i::before{content:"";position:absolute;top:8px;left:0;width:26px;height:26px;background:var(--paper);border:5px solid var(--navy);transform:rotate(45deg) scale(.8)}
+.ev-i.next::before{border-color:var(--red);background:var(--red)}
+.ev-i h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(28px,3vw,38px);line-height:.98}
+.ev-i .when{margin-top:10px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:14px;color:var(--bordo)}
+.ev-i p{margin-top:12px;font-size:16.5px;color:#34405E}
+@media(max-width:900px){
+  .ev{grid-template-columns:1fr;gap:34px;padding-left:40px}
+  .ev::before{left:12px;right:auto;top:6px;bottom:6px;width:4px;height:auto;background:linear-gradient(var(--navy) 0%,var(--navy) 66%,var(--red) 100%)}
+  .ev-i{padding:0}
+  .ev-i::before{top:2px;left:-40px}
+}
+
+/* ---------- CONTACTO ---------- */
+.ct{background:radial-gradient(800px 420px at 10% 0%,rgba(212,42,60,.2),transparent 60%),var(--navy)}
+.ct-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,88px);align-items:start}
+.ct-list{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:0}
+.ct-list li{display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid var(--line-d)}
+.ct-list li:last-child{border-bottom:1px solid var(--line-d)}
+.ct-list svg{width:26px;height:26px;color:var(--red);flex:none}
+.ct-list small{display:block;font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--mist)}
+.ct-list a,.ct-list .v{font-size:19px;font-weight:600;text-decoration:none;word-break:break-word}
+.ct-list a:hover{color:var(--red)}
+.copy{margin-left:auto;background:none;border:1.5px solid var(--line-d);color:#fff;font-family:var(--f-display);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px;padding:7px 12px;cursor:pointer}
+.copy:hover{border-color:#fff}
+.form{background:#fff;color:var(--navy);padding:clamp(24px,4vw,44px);display:grid;gap:18px;position:relative}
+.form::before{content:"";position:absolute;left:0;top:0;width:100%;height:6px;background:linear-gradient(90deg,var(--red) 0 40%,var(--bordo) 40% 70%,var(--navy-2) 70%)}
+.field{display:grid;gap:7px}
+.field label{font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:14px}
+.field input,.field select,.field textarea{font:inherit;font-size:17px;padding:14px 14px;border:1.5px solid rgba(10,26,58,.3);background:var(--paper);color:var(--navy);width:100%;border-radius:0}
+.field textarea{min-height:140px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--red);outline-offset:0;border-color:var(--navy);background:#fff}
+.form-out{display:none;border:2px solid var(--navy);padding:18px;background:var(--paper);gap:12px}
+.form-out.show{display:grid}
+.form-out p{font-size:15.5px}
+.form-out pre{margin:0;white-space:pre-wrap;word-break:break-word;font:15px/1.5 var(--f-body);background:#fff;border:1px solid var(--line-l);padding:12px;max-height:200px;overflow:auto}
+.form-out .copy{margin:0;color:var(--navy);border-color:var(--navy);justify-self:start}
+.form-err{color:var(--red);font-weight:600;font-size:15px;min-height:1.2em}
+.form .btn{justify-self:start}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr}}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--ink);padding-block:56px 40px;border-top:4px solid var(--red)}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;align-items:flex-start}
+.foot-name{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,4vw,46px);line-height:1}
+.foot-sub{font-family:var(--f-display);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:15px;color:var(--mist);margin-top:8px}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 26px;list-style:none;margin:40px 0 0;padding:28px 0 0;border-top:1px solid var(--line-d)}
+.foot-links a{font-family:var(--f-display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:16px;text-decoration:none;color:rgba(255,255,255,.8)}
+.foot-links a:hover{color:var(--red)}
+.foot small{display:block;margin-top:28px;color:var(--mist);font-size:14px}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none}
+  *{transition-duration:.01ms!important}
+  .js .rv.will{opacity:1;transform:none}
+  .gi{animation:none}
+}
+</style>
+
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><i></i>N. De Los Santos</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#inicio" data-s="inicio">Inicio</a></li>
+      <li><a href="#sobre-mi" data-s="sobre-mi">Sobre mí</a></li>
+      <li><a href="#formacion" data-s="formacion">Formación</a></li>
+      <li><a href="#experiencia" data-s="experiencia">Experiencia</a></li>
+      <li><a href="#proyectos" data-s="proyectos">Proyectos</a></li>
+      <li><a class="udf" href="#un-rato-de-futbol" data-s="un-rato-de-futbol">Un Rato de Fútbol</a></li>
+      <li><a href="#contacto" data-s="contacto">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<!-- 1. HERO -->
+<section id="inicio" class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Portfolio profesional</span>
+      <h1 class="hero-name"><span>Nicolás</span><span class="l2">De Los Santos</span></h1>
+      <p class="hero-role"><b>Periodismo Deportivo</b><b>Comunicación</b><b>Producción de contenidos</b></p>
+      <p class="hero-quote">Me gusta contar el deporte de cerca, con buenas preguntas y con ganas de ir siempre por una historia más.</p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="#proyectos">Ver mi portfolio <svg class="ico" viewBox="0 0 24 24" data-i="arrow"></svg></a>
+        <a class="btn btn-line" href="#sobre-mi">Conocerme</a>
+      </div>
+      <div class="socials" id="hero-socials"></div>
+    </div>
+    <div class="photo"><figure id="hero-photo"></figure></div>
+  </div>
+</section>
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- 2. SOBRE MI -->
+<section id="sobre-mi" class="sec white on-l">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo rv"><div id="about-photo" style="width:100%;height:100%"></div></div>
+      <div class="about-text rv">
+        <span class="eyebrow">Sobre mí</span>
+        <h2 class="h2" style="margin-bottom:28px">Quién soy</h2>
+        <p>Soy Nicolás, estudio Periodismo Deportivo y encontré en el deporte la mejor excusa para contar historias.</p>
+        <p>Me interesa lo que pasa en la cancha, pero más lo que pasa alrededor: quienes juegan, quienes miran y quienes hacen posible que el partido llegue a casa.</p>
+        <p>Hoy construyo mi camino dentro de Un Rato de Fútbol, un proyecto de comunicación deportiva donde trabajo en producción, entrevistas, coberturas y contenido.</p>
+        <p>Entiendo la comunicación como una conversación: preguntar bien, escuchar mejor y contar con claridad. Quiero seguir aprendiendo en cada transmisión, en cada entrevista y en cada estadio.</p>
+        <div class="traits">
+          <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.6 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.4 3.400 4 6.800C19 16.400 12 21 12 21z"/></svg><h3>Apasionado</h3><p>El deporte es el punto de partida de todo lo que hago.</p></div>
+          <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.6.500 1 1.200 1 2.100h5c0-.9.400-1.600 1-2.100A6 6 0 0 0 12 3z"/></svg><h3>Creativo</h3><p>Busco formatos y miradas nuevas para contar lo que pasa.</p></div>
+          <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6z"/><path d="M8.500 12.200l2.500 2.500 4.500-5"/></svg><h3>Comprometido</h3><p>Preparo cada trabajo como si fuera el más importante.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FORMACION -->
+<section id="formacion" class="sec dark">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Formación académica</span><h2 class="h2">Formación</h2>
+      <p class="lead">Mi carrera de Periodismo Deportivo, etapa por etapa: lo que estudié, lo que aprendí y lo que ya puse en práctica.</p></div>
+    <div class="tl" id="tl"></div>
+  </div>
+</section>
+
+<!-- 4. EXPERIENCIA -->
+<section id="experiencia" class="sec light on-l">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow" style="color:var(--bordo)">Trayectoria</span><h2 class="h2">Experiencia</h2>
+      <p class="lead">Medios, proyectos y coberturas donde ya estoy poniendo en práctica lo que aprendo.</p></div>
+    <div class="xp-list" id="xp"></div>
+  </div>
+</section>
+
+<!-- 5. PROYECTOS -->
+<section id="proyectos" class="sec dark">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Trabajos</span><h2 class="h2">Proyectos</h2>
+      <p class="lead">Producciones, entrevistas, programas y contenidos. Cada tarjeta guarda un trabajo propio.</p></div>
+    <div class="pj-grid" id="pj"></div>
+  </div>
+</section>
+
+<!-- 6. UN RATO DE FUTBOL -->
+<section id="un-rato-de-futbol" class="udf">
+  <div class="udf-mast">
+    <div class="wrap">
+      <span class="udf-flag">Proyecto destacado</span>
+      <h2 class="udf-title"><span>Un rato</span><span>de fútbol</span></h2>
+      <p class="udf-sub"><b>Pasión por el fútbol</b><b>Periodismo</b><b>Comunicación</b></p>
+      <div class="socials" id="udf-socials-top"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="u-block">
+      <div class="u-intro">
+        <div class="rv">
+          <p>Un proyecto de comunicación deportiva hecho de fútbol, periodismo y contenido.</p>
+          <p>Un Rato de Fútbol reúne transmisiones, entrevistas, coberturas de partidos y contenido digital en una misma propuesta. Participo activamente en el proyecto y trabajo en la producción, el trabajo periodístico y la presencia en redes.</p>
+          <p>Cubrimos clubes, partidos y eventos, y charlamos con quienes viven el deporte desde adentro.</p>
+        </div>
+        <div class="u-photo rv"><div id="udf-photo" style="width:100%;height:100%"></div></div>
+      </div>
+    </div>
+
+    <div class="u-block" style="padding-top:0">
+      <div class="u-head"><h3>¿Qué hacemos?</h3><span>Cuatro frentes</span></div>
+      <div class="do-grid rv">
+        <div class="do"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M10 9.500v3l3-1.500z" fill="currentColor"/></svg><h4>Transmisiones</h4><p>Cobertura y transmisión de partidos.</p></div>
+        <div class="do"><svg class="ico" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8.500 21h7"/></svg><h4>Entrevistas</h4><p>Entrevistas a jugadores, exjugadores, periodistas y protagonistas del deporte.</p></div>
+        <div class="do"><svg class="ico" viewBox="0 0 24 24"><path d="M3 20V11c0-4 4-7 9-7s9 3 9 7v9"/><path d="M3 20h18M7 20v-5h10v5M12 4v11"/></svg><h4>Coberturas</h4><p>Presencia en estadios y eventos deportivos.</p></div>
+        <div class="do"><svg class="ico" viewBox="0 0 24 24"><rect x="7" y="2.500" width="10" height="19" rx="2.500"/><path d="M11 18.500h2M10 6.500l5 3-5 3z" fill="currentColor"/></svg><h4>Contenido digital</h4><p>Reels, publicaciones, historias y contenido para redes sociales.</p></div>
+      </div>
+    </div>
+
+    <div class="u-block" style="padding-top:0">
+      <div class="u-head"><h3>Mi rol en Un Rato de Fútbol</h3><span>Qué hago</span></div>
+      <div class="role-wrap">
+        <ul class="role-list rv">
+          <li>Producción</li><li>Periodismo</li><li>Entrevistas</li><li>Investigación</li>
+          <li>Redes sociales</li><li>Transmisiones</li><li>Generación de contenido</li><li>Contacto con clubes y protagonistas</li>
+        </ul>
+        <div class="role-ph rv" id="role-ph"></div>
+      </div>
+    </div>
+
+    <div class="u-block" style="padding-top:0">
+      <div class="u-head"><h3>Entrevistas</h3><span>Galería de conversaciones</span></div>
+      <div class="iv-grid" id="iv"></div>
+    </div>
+
+    <div class="u-block" style="padding-top:0">
+      <div class="u-head"><h3>Coberturas y transmisiones</h3><span>Planilla de partidos</span></div>
+      <div class="cv-grid" id="cv"></div>
+      <div class="cv-photos" id="cv-photos"></div>
+    </div>
+
+    <div class="u-block" style="padding-top:0">
+      <div class="u-head"><h3>Seguinos</h3><span>Redes de Un Rato de Fútbol</span></div>
+      <div class="rs-grid" id="rs"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. HABILIDADES -->
+<section id="habilidades" class="sec white on-l">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Herramientas</span><h2 class="h2">Habilidades</h2></div>
+    <div class="sk-grid rv" id="sk"></div>
+  </div>
+</section>
+
+<!-- 8. PORTFOLIO MULTIMEDIA -->
+<section id="portfolio" class="sec dark">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow">Portfolio multimedia</span><h2 class="h2">Galería</h2>
+      <p class="lead">Fotos, videos, entrevistas, transmisiones, reels y trabajos periodísticos en un solo lugar.</p></div>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar galería"></div>
+    <div class="gal" id="gal"></div>
+    <p class="gal-note" id="gal-note"></p>
+  </div>
+</section>
+
+<!-- 9. EVOLUCION -->
+<section id="evolucion" class="sec light on-l">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="eyebrow" style="color:var(--bordo)">Mi camino</span><h2 class="h2">De dónde vengo y hacia dónde voy</h2></div>
+    <div class="ev rv" id="ev"></div>
+  </div>
+</section>
+
+<!-- 10. CONTACTO -->
+<section id="contacto" class="sec ct">
+  <div class="wrap">
+    <div class="ct-grid">
+      <div class="rv">
+        <span class="eyebrow">Contacto</span>
+        <h2 class="h2">¿Trabajamos juntos?</h2>
+        <p class="lead" style="margin-top:22px">Medios, clubes, productoras, periodistas y proyectos deportivos: si tienen una idea o una cobertura en mente, escríbanme y la charlamos.</p>
+        <ul class="ct-list" id="ct-list"></ul>
+      </div>
+      <form class="form rv" id="form" novalidate>
+        <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" type="text" autocomplete="name"></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-motivo">Motivo del contacto</label>
+          <select id="f-motivo" name="motivo">
+            <option>Propuesta de trabajo</option><option>Colaboración</option><option>Entrevista o nota</option><option>Cobertura o transmisión</option><option>Otro</option>
+          </select></div>
+        <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje"></textarea></div>
+        <p class="form-err" id="form-err" role="alert"></p>
+        <button class="btn btn-red" type="submit">Enviar mensaje <svg class="ico" viewBox="0 0 24 24" data-i="arrow"></svg></button>
+        <div class="form-out" id="form-out">
+          <p id="form-out-msg"></p>
+          <pre id="form-out-pre"></pre>
+          <button class="copy" type="button" id="form-copy">Copiar mensaje</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 11. FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div><div class="foot-name">Nicolás De Los Santos</div><div class="foot-sub">Periodismo Deportivo | Comunicación | Producción</div></div>
+      <div class="socials" id="foot-socials"></div>
+    </div>
+    <ul class="foot-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#formacion">Formación</a></li><li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#proyectos">Proyectos</a></li><li><a href="#un-rato-de-futbol">Un Rato de Fútbol</a></li><li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <small>© 2026 Nicolás De Los Santos. Todos los derechos reservados.</small>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   ZONA EDITABLE
+   Todo lo que está vacío ("") o en listas vacías ([]) se muestra como un
+   espacio marcado para completar. Cuando cargues el dato, la web lo usa.
+   ===================================================================== */
+const DATA = {
+  email: "",                       // tu email
+  cv: "",                          // link a tu CV (PDF)
+  fotoHero: "foto-nicolas.png",    // foto de portada
+  fotoSobreMi: "",                 // foto personal para "Sobre mí"
+  fotoUdf: "",                     // foto principal de Un Rato de Fútbol
+
+  // Tus redes personales / profesionales
+  redes: { linkedin: "", instagram: "", tiktok: "", youtube: "", x: "" },
+
+  // Redes de Un Rato de Fútbol
+  udf: {
+    instagram: { user: "@unratodefutbol_", url: "https://www.instagram.com/unratodefutbol_/" },
+    tiktok:    { user: "@unratodefutbol_", url: "https://www.tiktok.com/@unratodefutbol_" },
+    kick:      { user: "unratodefutbol",   url: "https://kick.com/unratodefutbol" },
+    youtube:   { user: "unratodefutboll",  url: "https://www.youtube.com/@unratodefutboll" }
+  },
+
+  // Fotos del rol en Un Rato de Fútbol: ["foto1.jpg", ...]
+  fotosRol: [],
+
+  // Formación: una entrada por etapa
+  formacion: [
+    { etapa: "Etapa 1", titulo: "Inicio de la carrera", fecha: "", texto: "Primer paso en Periodismo Deportivo.", materias: [], aprendizajes: [], proyectos: [], practicas: [] },
+    { etapa: "Etapa 2", titulo: "Primeros años", fecha: "", texto: "", materias: [], aprendizajes: [], proyectos: [], practicas: [] },
+    { etapa: "Etapa 3", titulo: "Práctica y proyectos", fecha: "", texto: "", materias: [], aprendizajes: [], proyectos: [], practicas: [] },
+    { etapa: "Hoy", titulo: "Presente", fecha: "", texto: "", materias: [], aprendizajes: [], proyectos: [], practicas: [] }
+  ],
+
+  // Experiencia: { nombre, rol, fecha, descripcion, contenido, link, fotos:[] }
+  experiencias: [
+    { nombre: "Un Rato de Fútbol", rol: "", fecha: "", descripcion: "Proyecto de comunicación deportiva en el que participo activamente: producción, entrevistas, coberturas y contenido digital.", contenido: "", link: "#un-rato-de-futbol", fotos: [] },
+    { }, { }
+  ],
+
+  // Proyectos: { titulo, descripcion, imagen, link }
+  proyectos: [
+    { titulo: "Producción periodística", descripcion: "", imagen: "", link: "" },
+    { titulo: "Entrevistas", descripcion: "", imagen: "", link: "#entrevistas" },
+    { titulo: "Programas deportivos", descripcion: "", imagen: "", link: "" },
+    { titulo: "Coberturas", descripcion: "", imagen: "", link: "" },
+    { titulo: "Transmisiones", descripcion: "", imagen: "", link: "" },
+    { titulo: "Contenido para redes", descripcion: "", imagen: "", link: "" },
+    { titulo: "Trabajos académicos destacados", descripcion: "", imagen: "", link: "" }
+  ],
+
+  // Entrevistas: { nombre, rol, fecha, descripcion, foto, link }
+  entrevistas: [],
+
+  // Coberturas: { evento, clubes, fecha, rol, foto }
+  coberturas: [],
+  fotosCoberturas: [],
+
+  // Galería: { cat: "PERIODISMO|ENTREVISTAS|TRANSMISIONES|REDES|PROYECTOS", tipo: "foto|video", src: "archivo.jpg", titulo: "", link: "" }
+  galeria: [],
+
+  // Evolución
+  evolucion: [
+    { titulo: "Dónde empecé", cuando: "", texto: "" },
+    { titulo: "Dónde estoy", cuando: "Hoy", texto: "Estudio Periodismo Deportivo y participo en Un Rato de Fútbol." },
+    { titulo: "Lo que construyo", cuando: "En marcha", texto: "Entrevistas, coberturas y contenido que suman práctica real en cada paso." },
+    { titulo: "Hacia dónde voy", cuando: "Próximo", texto: "Quiero seguir creciendo dentro de los medios deportivos: transmitir, entrevistar y contar más historias." }
+  ]
+};
+/* ================================ FIN ZONA EDITABLE ================================ */
+
+const ICONS = {
+  instagram:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.200" cy="6.800" r=".9" fill="currentColor"/>',
+  youtube:'<rect x="2.500" y="5.500" width="19" height="13" rx="4"/><path d="M10 9.200v5.600l4.800-2.800z" fill="currentColor"/>',
+  tiktok:'<path d="M14 3v11.200a3.700 3.700 0 1 1-3.700-3.700"/><path d="M14 3c.3 2.400 1.900 4 4.500 4.300"/>',
+  kick:'<path d="M5 3.500h4v6l4-6h5l-5 7 5 10h-5l-3-6.200-1 1.400v4.800H5z" fill="currentColor" stroke="none"/>',
+  linkedin:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.500V16M8 7.800v.1M11.500 16v-5.500M11.500 13c0-1.600 1-2.600 2.400-2.600S16 11.400 16 13v3"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2.500"/><path d="M4 7l8 6 8-6"/>',
+  x:'<path d="M4 4l16 16M20 4L4 20"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>'
+};
+const ico = (n, cls='ico') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const todo = t => `<span class="todo">${esc(t)}</span>`;
+const val = (v, ph) => v ? esc(v) : todo(ph);
+const slot = (label, hint, ratio) => `<div class="slot"${ratio?` style="aspect-ratio:${ratio}"`:''}><div>${esc(label)}<small>${esc(hint||'')}</small></div></div>`;
+const img = (src, alt) => `<img src="${esc(src)}" alt="${esc(alt||'')}" loading="lazy">`;
+const isExt = u => /^https?:/.test(u);
+
+/* íconos sueltos en el HTML */
+document.querySelectorAll('[data-i]').forEach(s => s.innerHTML = ICONS[s.dataset.i]);
+
+/* HERO */
+$('#hero-photo').innerHTML = DATA.fotoHero ? img(DATA.fotoHero, 'Nicolás De Los Santos junto a un micrófono de radio') : slot('Tu foto profesional', 'Formato cuadrado, mínimo 1000 px', '1/1');
+$('#hero-photo img')?.removeAttribute('loading');
+const tape = 'Periodismo Deportivo|Comunicación|Producción de contenidos|Un Rato de Fútbol|Pasión por el fútbol'.split('|');
+const tapeHTML = tape.map(t => `<span>${t}</span>`).join('');
+$('#ticker').innerHTML = tapeHTML.repeat(4);
+$('#ticker').style.setProperty('--n', 1);
+
+/* REDES */
+function socialLink(name, url, label) {
+  const ok = !!url;
+  return `<a class="soc${ok?'':' pending'}" ${ok?`href="${esc(url)}" target="_blank" rel="noopener"`:'role="link" aria-disabled="true"'} aria-label="${esc(label)}${ok?'':' (pendiente de agregar)'}" title="${esc(label)}${ok?'':' · pendiente'}">${ico(name)}</a>`;
+}
+const R = DATA.redes;
+const personal = [['linkedin',R.linkedin,'LinkedIn'],['instagram',R.instagram,'Instagram personal'],['tiktok',R.tiktok,'TikTok personal'],['youtube',R.youtube,'YouTube personal'],['x',R.x,'X']];
+const udfs = [['instagram',DATA.udf.instagram.url,'Instagram de Un Rato de Fútbol'],['tiktok',DATA.udf.tiktok.url,'TikTok de Un Rato de Fútbol'],['kick',DATA.udf.kick.url,'Kick de Un Rato de Fútbol'],['youtube',DATA.udf.youtube.url,'YouTube de Un Rato de Fútbol']];
+const mailLink = socialLink('mail', DATA.email ? 'mailto:'+DATA.email : '', 'Email');
+$('#hero-socials').innerHTML = mailLink + personal.slice(0,2).map(p => socialLink(...p)).join('') + udfs.map(p => socialLink(...p)).join('');
+$('#udf-socials-top').innerHTML = udfs.map(p => socialLink(...p)).join('');
+$('#foot-socials').innerHTML = mailLink + personal.slice(0,2).map(p => socialLink(...p)).join('') + udfs.map(p => socialLink(...p)).join('');
+
+/* SOBRE MI / UDF fotos */
+$('#about-photo').innerHTML = DATA.fotoSobreMi ? img(DATA.fotoSobreMi, 'Foto personal de Nicolás') : slot('Tu foto personal', 'Vertical 4:5. Una en la que te sientas cómodo', '4/5');
+$('#about-photo > *').style.height = '100%';
+$('#udf-photo').innerHTML = DATA.fotoUdf ? img(DATA.fotoUdf, 'Un Rato de Fútbol') : slot('Foto de Un Rato de Fútbol', 'Una imagen del equipo, de una transmisión o de un estadio', '4/3');
+$('#udf-photo > *').style.height = '100%';
+
+/* FORMACION */
+const listOrSlot = (arr, ph) => arr && arr.length ? `<ul>${arr.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>` : `<ul><li style="padding-left:0">${todo(ph)}</li></ul>`;
+$('#tl').innerHTML = DATA.formacion.map(f => `
+  <article class="tl-item rv">
+    <div><div class="tl-tag">${esc(f.etapa)}</div><h3>${esc(f.titulo)}</h3>
+      <div class="when">${val(f.fecha,'Agregar año')}</div>
+      ${f.texto?`<p class="desc">${esc(f.texto)}</p>`:`<p class="desc">${todo('Contar cómo fue esta etapa')}</p>`}</div>
+    <div class="facets">
+      <div class="facet"><h4>Materias destacadas</h4>${listOrSlot(f.materias,'Agregar materias')}</div>
+      <div class="facet"><h4>Aprendizajes</h4>${listOrSlot(f.aprendizajes,'Agregar aprendizajes')}</div>
+      <div class="facet"><h4>Proyectos</h4>${listOrSlot(f.proyectos,'Agregar proyectos')}</div>
+      <div class="facet"><h4>Prácticas</h4>${listOrSlot(f.practicas,'Agregar experiencias')}</div>
+    </div>
+  </article>`).join('');
+
+/* EXPERIENCIA */
+$('#xp').innerHTML = DATA.experiencias.map((x,i) => {
+  const fotos = (x.fotos && x.fotos.length) ? x.fotos.slice(0,3).map(f => img(f,x.nombre)).join('') : [slot('Foto','Agregar imagen'),slot('Foto',''),slot('Foto','')].join('');
+  return `<article class="xp rv">
+    <div class="xp-media">${fotos}</div>
+    <div class="xp-body">
+      <div class="xp-meta"><span>${val(x.fecha,'Agregar fecha')}</span></div>
+      <h3>${val(x.nombre,'Nombre del medio o proyecto')}</h3>
+      <div class="role">${x.rol?esc(x.rol):todo('Rol desempeñado')}</div>
+      <p>${x.descripcion?esc(x.descripcion):todo('Descripción de la experiencia')}</p>
+      <div class="prod"><b>Contenido producido</b>${val(x.contenido,'Entrevistas, notas, transmisiones…')}</div>
+      ${x.link?`<a class="btn btn-dark" href="${esc(x.link)}" ${isExt(x.link)?'target="_blank" rel="noopener"':''}>Ver más ${ico('arrow')}</a>`:''}
+    </div></article>`;
+}).join('');
+
+/* PROYECTOS */
+const wideIdx = [0, DATA.proyectos.length-1];
+$('#pj').innerHTML = DATA.proyectos.map((p,i) => `
+  <article class="pj rv${wideIdx.includes(i)?' wide':''}">
+    ${p.imagen?img(p.imagen,p.titulo).replace('<img','<img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"'):slot('Imagen del proyecto','Agregar foto o captura')}
+    <div class="pj-in"><h3>${esc(p.titulo)}</h3>
+      <p>${p.descripcion?esc(p.descripcion):'Espacio para contar este trabajo en pocas líneas.'}</p>
+      ${p.link?`<a href="${esc(p.link)}" ${isExt(p.link)?'target="_blank" rel="noopener"':''}>Conocer más ${ico('arrow')}</a>`:`<a href="#contacto">Conocer más ${ico('arrow')}</a>`}</div>
+  </article>`).join('');
+
+/* UDF: rol fotos */
+const rp = DATA.fotosRol;
+$('#role-ph').innerHTML = [0,1,2].map(i => rp[i] ? img(rp[i],'Trabajo en Un Rato de Fútbol') : slot('Foto de trabajo','Ejemplo de tu rol')).join('');
+
+/* UDF: entrevistas */
+const ivs = DATA.entrevistas.length ? DATA.entrevistas : [{},{},{}];
+$('#iv').innerHTML = ivs.map(e => `
+  <article class="iv rv">
+    ${e.foto?img(e.foto,e.nombre):slot('Foto de la entrevista','Agregar imagen','4/3')}
+    <div class="iv-b">
+      <div class="iv-meta"><span>${val(e.rol,'Rol o profesión')}</span><span>${val(e.fecha,'Fecha')}</span></div>
+      <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
+      <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
+      ${e.link?`<a class="btn btn-dark" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}
+    </div></article>`).join('');
+
+/* UDF: coberturas */
+const cvs = DATA.coberturas.length ? DATA.coberturas : [{},{}];
+$('#cv').innerHTML = cvs.map(c => `
+  <article class="tk rv"><dl class="tk-main">
+    <div class="full"><dt>Partido / Evento</dt><dd class="${c.evento?'':'ph'}">${c.evento?esc(c.evento):'A completar'}</dd></div>
+    <div><dt>Clubes</dt><dd class="${c.clubes?'':'ph'}">${c.clubes?esc(c.clubes):'A completar'}</dd></div>
+    <div><dt>Rol</dt><dd class="${c.rol?'':'ph'}">${c.rol?esc(c.rol):'A completar'}</dd></div>
+  </dl>
+  <dl class="tk-stub"><div><dt>Fecha</dt><dd>${c.fecha?esc(c.fecha):'--/--'}</dd></div></dl></article>`).join('');
+const cp = DATA.fotosCoberturas;
+$('#cv-photos').innerHTML = [0,1,2,3].map(i => cp[i] ? img(cp[i],'Cobertura') : slot('Estadio / transmisión','Agregar foto')).join('');
+
+/* UDF: redes */
+$('#rs').innerHTML = [['instagram','Instagram'],['tiktok','TikTok'],['kick','Kick'],['youtube','YouTube']].map(([k,n]) => `
+  <a class="rs rv" href="${esc(DATA.udf[k].url)}" target="_blank" rel="noopener">${ico(k)}<b>${n}</b><span>${esc(DATA.udf[k].user)}</span><em>Abrir ${ico('arrow')}</em></a>`).join('');
+
+/* HABILIDADES */
+const SK = [
+  ['Periodismo',['Redacción periodística','Investigación','Entrevistas','Análisis deportivo','Cobertura']],
+  ['Producción',['Producción de programas','Producción audiovisual','Transmisiones','Organización de contenidos']],
+  ['Digital',['Redes sociales','Creación de contenido','Edición','Comunicación digital']]
+];
+$('#sk').innerHTML = SK.map(([t,l]) => `<div class="sk"><h3>${t}</h3><ul>${l.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+
+/* GALERIA */
+const CATS = ['TODO','PERIODISMO','ENTREVISTAS','TRANSMISIONES','REDES','PROYECTOS'];
+const shapes = ['','tall','','wide','','','tall','','wide','','',''];
+const phCats = ['PERIODISMO','ENTREVISTAS','TRANSMISIONES','REDES','PROYECTOS','ENTREVISTAS','TRANSMISIONES','PERIODISMO','REDES','PROYECTOS','TRANSMISIONES','ENTREVISTAS'];
+const hasGal = DATA.galeria.length > 0;
+const items = hasGal ? DATA.galeria : phCats.map(c => ({cat:c, ph:true}));
+let cur = 'TODO';
+function renderGal() {
+  const html = items.map((g,i) => {
+    const show = cur==='TODO' || g.cat===cur;
+    const inner = g.ph ? slot('Espacio libre', `Para ${g.cat.toLowerCase()}`) : (g.link ? `<a href="${esc(g.link)}" target="_blank" rel="noopener" style="display:block;position:absolute;inset:0" aria-label="${esc(g.titulo||g.cat)}">${img(g.src,g.titulo)}</a>` : img(g.src,g.titulo));
+    return `<div class="gi ${shapes[i%shapes.length]}" data-cat="${g.cat}" ${show?'':'hidden'}>${inner}<span class="gi-tag">${g.tipo==='video'?'Video · ':''}${g.cat}</span></div>`;
+  }).join('');
+  $('#gal').innerHTML = html;
+  $('#gal-note').textContent = hasGal ? '' : 'Espacios listos para tus fotos, videos, capturas de transmisiones, reels y trabajos. Los filtros ya funcionan.';
+}
+$('#filters').innerHTML = CATS.map(c => `<button class="fbtn" type="button" data-c="${c}" aria-pressed="${c==='TODO'}">${c}</button>`).join('');
+$('#filters').addEventListener('click', e => {
+  const b = e.target.closest('.fbtn'); if(!b) return;
+  cur = b.dataset.c;
+  document.querySelectorAll('.fbtn').forEach(x => x.setAttribute('aria-pressed', x===b));
+  renderGal();
+});
+renderGal();
+
+/* EVOLUCION */
+$('#ev').innerHTML = DATA.evolucion.map((e,i,a) => `
+  <div class="ev-i${i===a.length-1?' next':''}"><h3>${esc(e.titulo)}</h3>
+  <div class="when">${val(e.cuando,'Agregar fecha')}</div>
+  <p>${e.texto?esc(e.texto):todo('Contar esta etapa')}</p></div>`).join('');
+
+/* CONTACTO */
+async function copyText(t, btn) {
+  const old = btn.textContent;
+  try { await navigator.clipboard.writeText(t); btn.textContent = 'Copiado'; }
+  catch(_) {
+    const r = document.createRange(); const n = btn.previousElementSibling || btn;
+    try { const sel = getSelection(); r.selectNodeContents(n); sel.removeAllRanges(); sel.addRange(r); } catch(__){}
+    btn.textContent = 'Seleccionado';
+  }
+  setTimeout(() => btn.textContent = old, 1800);
+}
+const ctRows = [];
+ctRows.push(`<li>${ico('mail')}<div><small>Email</small>${DATA.email?`<span class="v" id="mail-v">${esc(DATA.email)}</span>`:`<span class="v">${todo('Agregar email')}</span>`}</div>${DATA.email?'<button class="copy" type="button" id="mail-copy">Copiar</button>':''}</li>`);
+ctRows.push(`<li>${ico('instagram')}<div><small>Instagram · Un Rato de Fútbol</small><a href="${DATA.udf.instagram.url}" target="_blank" rel="noopener">${esc(DATA.udf.instagram.user)}</a></div></li>`);
+ctRows.push(`<li>${ico('linkedin')}<div><small>LinkedIn</small>${R.linkedin?`<a href="${esc(R.linkedin)}" target="_blank" rel="noopener">${esc(R.linkedin.replace(/^https?:\/\/(www\.)?/,''))}</a>`:`<span class="v">${todo('Agregar LinkedIn')}</span>`}</div></li>`);
+ctRows.push(`<li>${ico('youtube')}<div><small>Otras redes</small><a href="${DATA.udf.youtube.url}" target="_blank" rel="noopener">YouTube · ${esc(DATA.udf.youtube.user)}</a>${' · '}<a href="${DATA.udf.tiktok.url}" target="_blank" rel="noopener">TikTok</a>${' · '}<a href="${DATA.udf.kick.url}" target="_blank" rel="noopener">Kick</a></div></li>`);
+if (DATA.cv) ctRows.push(`<li>${ico('arrow')}<div><small>Currículum</small><a href="${esc(DATA.cv)}" target="_blank" rel="noopener">Ver mi CV</a></div></li>`);
+$('#ct-list').innerHTML = ctRows.join('');
+$('#mail-copy')?.addEventListener('click', e => copyText(DATA.email, e.currentTarget));
+
+$('#form').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = $('#f-nombre').value.trim(), m = $('#f-email').value.trim(), msg = $('#f-msg').value.trim(), mo = $('#f-motivo').value;
+  const err = $('#form-err'); const out = $('#form-out');
+  if (!n || !/^\S+@\S+\.\S+$/.test(m) || !msg) { err.textContent = 'Completá tu nombre, un email válido y el mensaje para continuar.'; out.classList.remove('show'); return; }
+  err.textContent = '';
+  const text = `Hola Nicolás, soy ${n} (${m}).\nMotivo: ${mo}\n\n${msg}`;
+  $('#form-out-pre').textContent = text;
+  $('#form-out-msg').textContent = 'Tu mensaje está listo. Esta página todavía no tiene un servicio de envío conectado, así que copialo y mandalo por email o por Instagram.';
+  out.classList.add('show');
+});
+$('#form-copy').addEventListener('click', e => copyText($('#form-out-pre').textContent, e.currentTarget));
+
+/* NAV */
+const burger = $('#burger'), menu = $('#menu');
+burger.addEventListener('click', () => { const o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o); burger.setAttribute('aria-label', o?'Cerrar menú':'Abrir menú'); });
+menu.addEventListener('click', e => { if (e.target.closest('a')) { menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); } });
+const links = [...document.querySelectorAll('.menu a')];
+const secs = links.map(a => document.getElementById(a.dataset.s));
+function spy() {
+  const y = scrollY + 120; let cur = 0;
+  secs.forEach((s,i) => { if (s && s.offsetTop <= y) cur = i; });
+  links.forEach((a,i) => a.classList.toggle('on', i===cur));
+}
+addEventListener('scroll', spy, {passive:true}); spy();
+
+/* REVEAL */
+document.documentElement.classList.add('js');
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), {threshold:.12});
+  document.querySelectorAll('.rv').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top > innerHeight) { el.classList.add('will'); io.observe(el); } else el.classList.add('in');
+  });
+}
+</script>
+</body>
+</html>
