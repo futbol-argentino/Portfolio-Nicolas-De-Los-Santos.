@@ -95,7 +95,7 @@ section[id]{scroll-margin-top:64px}
 .menu a{display:block;white-space:nowrap;padding:8px 10px;font-family:var(--f-display);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.78);border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
 .menu a:hover{color:#fff}
 .menu a.on{color:#fff;border-color:var(--red)}
-.menu a.udf::after{content:"";display:inline-block;width:7px;height:7px;margin-left:8px;background:var(--red);border-radius:50%;vertical-align:middle}
+.menu a.udf-link::after{content:"";display:inline-block;width:7px;height:7px;margin-left:8px;background:var(--red);border-radius:50%;vertical-align:middle}
 .burger{display:none;width:46px;height:46px;border:1.5px solid var(--line-d);background:none;color:#fff;cursor:pointer;place-items:center}
 .burger span,.burger span::before,.burger span::after{display:block;width:22px;height:2px;background:currentColor;position:relative;transition:transform .25s,background .25s}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0}
@@ -150,12 +150,27 @@ section[id]{scroll-margin-top:64px}
 .about-text p{font-size:clamp(18px,1.9vw,21px);line-height:1.65;margin-top:20px;max-width:58ch;color:#26314D}
 .about-text p:first-of-type{margin-top:0;font-size:clamp(22px,2.6vw,30px);line-height:1.35;font-weight:600;color:var(--navy)}
 .traits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
-.trait{padding:22px 20px 24px;background:var(--navy);color:#fff;position:relative;overflow:hidden;transition:transform .3s,background .3s}
+.trait{min-width:0;padding:22px 18px 24px;background:var(--navy);color:#fff;position:relative;overflow:hidden;transition:transform .3s,background .3s}
 .trait:hover{transform:translateY(-6px);background:var(--bordo)}
-.trait h3{font-family:var(--f-display);font-weight:900;font-size:clamp(24px,2.6vw,32px);letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.trait h3{font-family:var(--f-display);font-weight:900;font-size:clamp(20px,2vw,27px);letter-spacing:.04em;overflow-wrap:anywhere;text-transform:uppercase;line-height:1}
 .trait p{margin-top:10px!important;font-size:15.5px!important;line-height:1.45!important;color:rgba(255,255,255,.8)!important;font-weight:400!important}
 .trait svg{width:30px;height:30px;margin-bottom:18px;color:var(--red);stroke-width:2}
 @media(max-width:900px){.about-grid{grid-template-columns:1fr}.about-photo{max-width:420px}.traits{grid-template-columns:1fr}}
+
+.ficha{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:32px 0 0;border:2px solid var(--navy);max-width:58ch}
+.ficha>div{padding:12px 16px;border-bottom:1px solid var(--line-l)}
+.ficha>div:nth-child(odd){border-right:1px solid var(--line-l)}
+.ficha>div:nth-last-child(-n+2){border-bottom:0}
+.ficha dt{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--red)}
+.ficha dd{margin:2px 0 0;font-weight:600;font-size:17px;color:var(--navy)}
+@media(max-width:480px){.ficha{grid-template-columns:1fr}.ficha>div:nth-child(odd){border-right:0}.ficha>div:nth-last-child(2){border-bottom:1px solid var(--line-l)}}
+.story-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.story-head{position:sticky;top:96px}
+.story-body p{font-size:clamp(18px,1.9vw,21px);line-height:1.7;color:rgba(255,255,255,.86);margin-top:22px}
+.story-body p:first-child{margin-top:0}
+.story-body p:first-child::first-letter{font-family:var(--f-display);font-weight:900;float:left;font-size:4.6em;line-height:.78;padding:6px 12px 0 0;color:var(--red)}
+.story-body blockquote{margin:40px 0 0;padding:6px 0 6px 26px;border-left:6px solid var(--red);font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(28px,3.6vw,46px);line-height:1.02;letter-spacing:.01em;text-wrap:balance}
+@media(max-width:900px){.story-grid{grid-template-columns:1fr}.story-head{position:static}}
 
 /* ---------- FORMACION ---------- */
 .tl{position:relative;display:grid;gap:22px;padding-left:34px}
@@ -410,7 +425,7 @@ section[id]{scroll-margin-top:64px}
       <li><a href="#formacion" data-s="formacion">Formación</a></li>
       <li><a href="#experiencia" data-s="experiencia">Experiencia</a></li>
       <li><a href="#proyectos" data-s="proyectos">Proyectos</a></li>
-      <li><a class="udf" href="#un-rato-de-futbol" data-s="un-rato-de-futbol">Un Rato de Fútbol</a></li>
+      <li><a class="udf-link" href="#un-rato-de-futbol" data-s="un-rato-de-futbol">Un Rato de Fútbol</a></li>
       <li><a href="#contacto" data-s="contacto">Contacto</a></li>
     </ul>
   </div>
@@ -444,16 +459,41 @@ section[id]{scroll-margin-top:64px}
       <div class="about-text rv">
         <span class="eyebrow">Sobre mí</span>
         <h2 class="h2" style="margin-bottom:28px">Quién soy</h2>
-        <p>Soy Nicolás, estudio Periodismo Deportivo y encontré en el deporte la mejor excusa para contar historias.</p>
-        <p>Me interesa lo que pasa en la cancha, pero más lo que pasa alrededor: quienes juegan, quienes miran y quienes hacen posible que el partido llegue a casa.</p>
-        <p>Hoy construyo mi camino dentro de Un Rato de Fútbol, un proyecto de comunicación deportiva donde trabajo en producción, entrevistas, coberturas y contenido.</p>
-        <p>Entiendo la comunicación como una conversación: preguntar bien, escuchar mejor y contar con claridad. Quiero seguir aprendiendo en cada transmisión, en cada entrevista y en cada estadio.</p>
+        <p>Soy Nicolás De Los Santos, periodista deportivo.</p>
+        <p>Nací el 17 de noviembre de 2004 en la ciudad de Santa Fe, Argentina, y el fútbol me acompaña desde mis primeros días. Me formo en Periodismo Deportivo y me interesa todo lo que pasa dentro y fuera de la cancha: quienes juegan, quienes miran y quienes hacen posible que el partido llegue a casa.</p>
+        <p>Entiendo la comunicación como una conversación: preguntar bien, escuchar mejor y contar con claridad. Hoy empujo ese camino con Un Rato de Fútbol, un proyecto de comunicación deportiva donde trabajo en producción, entrevistas, coberturas y contenido.</p>
+        <dl class="ficha">
+          <div><dt>Nombre</dt><dd>Nicolás De Los Santos</dd></div>
+          <div><dt>Nacimiento</dt><dd>17 de noviembre de 2004</dd></div>
+          <div><dt>Edad</dt><dd id="edad">—</dd></div>
+          <div><dt>Ciudad</dt><dd>Santa Fe, Argentina</dd></div>
+          <div><dt>Profesión</dt><dd>Periodista deportivo</dd></div>
+          <div><dt>Formación</dt><dd>Periodismo Deportivo</dd></div>
+          <div><dt>Proyecto</dt><dd>Un Rato de Fútbol</dd></div>
+          <div><dt>Pasión</dt><dd>El fútbol</dd></div>
+        </dl>
         <div class="traits">
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.6 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.4 3.400 4 6.800C19 16.400 12 21 12 21z"/></svg><h3>Apasionado</h3><p>El deporte es el punto de partida de todo lo que hago.</p></div>
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.6.500 1 1.200 1 2.100h5c0-.9.400-1.600 1-2.100A6 6 0 0 0 12 3z"/></svg><h3>Creativo</h3><p>Busco formatos y miradas nuevas para contar lo que pasa.</p></div>
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6z"/><path d="M8.500 12.200l2.500 2.500 4.500-5"/></svg><h3>Comprometido</h3><p>Preparo cada trabajo como si fuera el más importante.</p></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2b. HISTORIA -->
+<section id="historia" class="sec deep story">
+  <div class="wrap story-grid">
+    <div class="story-head rv">
+      <span class="eyebrow">Mi historia</span>
+      <h2 class="h2">Una pasión que nació en la cancha</h2>
+    </div>
+    <div class="story-body rv">
+      <p>Mi historia con el fútbol comenzó desde que nací, de la mano de mi papá, quien me llevó a la cancha desde mis primeros días. Fui creciendo con una pasión que, sin darme cuenta, terminaría marcando mi camino.</p>
+      <p>Con el tiempo, el fútbol dejó de ser solamente algo que disfrutaba: también nació en mí el deseo de contar sus historias, transmitir emociones y conocer todo lo que sucede dentro y fuera de una cancha. Así descubrí mi vocación por el periodismo deportivo.</p>
+      <p>Hoy, mientras me formo para convertir esa pasión en mi profesión, busco construir mi propio camino, aprendiendo, creando y creciendo con cada experiencia. En ese recorrido nació Un Rato de Fútbol, un proyecto que me permite transformar todo lo que siento por este deporte en algo propio.</p>
+      <blockquote>Todo empezó de la mano de mi papá, en una cancha. Hoy, sueño con hacer del fútbol una forma de vida.</blockquote>
     </div>
   </div>
 </section>
@@ -884,6 +924,11 @@ $('#form').addEventListener('submit', e => {
   out.classList.add('show');
 });
 $('#form-copy').addEventListener('click', e => copyText($('#form-out-pre').textContent, e.currentTarget));
+
+/* EDAD (se calcula sola a partir del 17/11/2004) */
+(function(){ const n=new Date(), b=new Date(2004,10,17); let a=n.getFullYear()-b.getFullYear();
+  if (n.getMonth()<b.getMonth() || (n.getMonth()===b.getMonth() && n.getDate()<b.getDate())) a--;
+  $('#edad').textContent = a + ' años'; })();
 
 /* NAV */
 const burger = $('#burger'), menu = $('#menu');
