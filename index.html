@@ -335,6 +335,48 @@ section[id]{scroll-margin-top:64px}
 @media(max-width:1000px){.rs-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.rs-grid{grid-template-columns:1fr}}
 
+/* ---------- SECCIONES DE PROYECTO ---------- */
+.proj{background:var(--p-bg);color:var(--p-ink);padding-block:clamp(72px,10vw,120px)}
+.proj .wrap{display:grid;gap:clamp(52px,7vw,88px)}
+.proj .slot{color:var(--p-ink);border-color:color-mix(in srgb,var(--p-ink) 40%,transparent);background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--p-ink) 7%,transparent) 0 10px,transparent 10px 20px)}
+.proj-mast{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:center}
+.proj-flag{display:inline-block;background:var(--p-ac);color:#fff;font-family:var(--f-display);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:15px;padding:6px 14px}
+.proj h2{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.88;font-size:clamp(56px,10vw,140px);margin-top:20px}
+.proj-years{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;font-size:clamp(18px,2.2vw,26px);color:var(--p-ac);margin-top:16px}
+.proj-tag{font-size:clamp(18px,2vw,22px);margin-top:14px;max-width:34ch;font-weight:500}
+.proj-chips{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.proj-chips li{padding:6px 13px;border:1.5px solid var(--p-ink);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:15px}
+.proj-logo{display:grid;place-items:center}
+.proj-logo img{width:100%;max-width:440px;height:auto;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%);mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%)}
+.proj-h{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:4px solid var(--p-ink);padding-bottom:12px;margin-bottom:28px}
+.proj-h h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(34px,5vw,58px);line-height:.95}
+.proj-h span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
+.proj-text p{font-size:clamp(19px,2vw,23px);line-height:1.6;max-width:60ch;margin-top:16px}
+.proj-text p:first-child{margin-top:0;font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.3}
+.proj-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.proj-role{background:var(--p-ink);color:var(--p-bg);padding:26px 22px 28px;transition:transform .3s,background .3s}
+.proj-role:hover{transform:translateY(-6px);background:var(--p-ac)}
+.proj-role h4{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(28px,3vw,38px);line-height:1;letter-spacing:.03em}
+.proj-role p{margin-top:12px;font-size:16.5px;opacity:.9}
+.proj-eps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.proj-ep{border:3px solid var(--p-ink);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.proj-ep:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--p-ac)}
+.proj-ep .slot,.proj-ep img{aspect-ratio:4/3;width:100%;object-fit:cover;border-width:0 0 3px 0;border-style:solid;border-color:var(--p-ink)}
+.proj-ep-b{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.proj-ep-b .m{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
+.proj-ep-b h4{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:28px;line-height:1}
+.proj-ep-b .btn{margin-top:auto;align-self:flex-start;padding:11px 18px;font-size:15px;background:var(--p-ink);color:var(--p-bg)}
+.proj-ep-b .btn:hover{background:var(--p-ac);color:#fff}
+.proj-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.proj-photos .slot,.proj-photos img{aspect-ratio:4/3;width:100%;object-fit:cover}
+.proj-links{display:flex;flex-wrap:wrap;gap:12px}
+.proj-links .btn{background:var(--p-ink);color:var(--p-bg);padding:13px 22px;font-size:16px}
+.proj-links .btn:hover{background:var(--p-ac);color:#fff}
+.proj-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:16px;text-decoration:none;border-bottom:2px solid var(--p-ac);padding-bottom:3px;justify-self:start}
+.proj-back svg{width:18px;height:18px;transform:rotate(180deg);transition:transform .25s}
+.proj-back:hover svg{transform:rotate(180deg) translateX(6px)}
+@media(max-width:900px){.proj-mast{grid-template-columns:1fr}.proj-logo{order:-1;justify-items:start}.proj-logo img{max-width:300px}.proj-roles,.proj-eps{grid-template-columns:1fr}.proj-photos{grid-template-columns:1fr 1fr}}
+
 /* ---------- HABILIDADES ---------- */
 .sk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .sk{background:#fff;border:1px solid var(--line-l);padding:30px 26px 32px;position:relative;transition:transform .3s,box-shadow .3s}
@@ -476,13 +518,6 @@ section[id]{scroll-margin-top:64px}
         <p>Soy Nicolás De Los Santos, periodista deportivo.</p>
         <p>Nací el 17 de noviembre de 2004 en la ciudad de Santa Fe, Argentina, y el fútbol me acompaña desde mis primeros días. Estoy formado como periodista deportivo y me interesa todo lo que pasa dentro y fuera de la cancha: quienes juegan, quienes miran y quienes hacen posible que el partido llegue a casa.</p>
         <p>Entiendo la comunicación como una conversación: preguntar bien, escuchar mejor y contar con claridad. Hoy empujo ese camino con Un Rato de Fútbol, un proyecto de comunicación deportiva donde trabajo en producción, entrevistas, coberturas y contenido.</p>
-        <dl class="ficha">
-          <div><dt>Nombre</dt><dd>Nicolás De Los Santos</dd></div>
-          <div><dt>Nacimiento</dt><dd>17 de noviembre de 2004</dd></div>
-          <div><dt>Edad</dt><dd id="edad">—</dd></div>
-          <div><dt>Ciudad</dt><dd>Santa Fe, Argentina</dd></div>
-          <div><dt>Profesión</dt><dd>Periodista deportivo</dd></div>
-        </dl>
         <div class="traits">
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9-9.2C1.6 8.4 3.6 5 7 5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.4 3.400 4 6.800C19 16.400 12 21 12 21z"/></svg><h3>Apasionado</h3><p>El deporte es el punto de partida de todo lo que hago.</p></div>
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.6.500 1 1.200 1 2.100h5c0-.9.400-1.600 1-2.100A6 6 0 0 0 12 3z"/></svg><h3>Creativo</h3><p>Busco formatos y miradas nuevas para contar lo que pasa.</p></div>
@@ -588,6 +623,9 @@ section[id]{scroll-margin-top:64px}
     </div>
   </div>
 </section>
+
+<!-- SECCIONES DE PROYECTO (se generan desde DATA.detalles) -->
+<div id="detalles"></div>
 
 <!-- 7. HABILIDADES -->
 <section id="habilidades" class="sec white on-l">
@@ -706,8 +744,25 @@ const DATA = {
     { nombre: "Post Partido", fecha: "2024 – 2026",
       rol: ["Entrevistador","Productor","Editor"],
       descripcion: "Proyecto de entrevistas a deportistas que pone el foco en lo que pasa fuera del deporte: lo cotidiano y la vida de cada deportista.",
-      contenido: "Entrevistas a deportistas.", link: "", logo: "post-partido.png", logoClass: "light", fotos: [] },
+      contenido: "Entrevistas a deportistas.", link: "#post-partido", logo: "post-partido.png", logoClass: "light", fotos: [] },
     { }
+  ],
+
+  // Secciones de detalle de cada experiencia (el botón "Ver más" de Experiencia lleva acá).
+  // Para sumar otra: agregá una experiencia con link:"#mi-id" y una entrada acá con id:"mi-id".
+  detalles: [
+    { id: "post-partido", nombre: "Post Partido", anios: "2024 – 2026", logo: "post-partido.png",
+      tema: { bg: "#E6E1BE", ink: "#1B2F4B", ac: "#B9472F" },
+      bajada: "Entrevistas a deportistas, más allá del deporte.",
+      texto: ["Post Partido es un proyecto de entrevistas a deportistas. Su foco está en lo que pasa fuera del deporte: lo cotidiano y la vida de cada deportista.",
+              "Es el espacio para conocer a la persona que hay detrás del atleta."],
+      roles: [ { rol: "Entrevistador", texto: "Preparo y conduzco las conversaciones con los deportistas." },
+               { rol: "Productor", texto: "Organizo cada entrevista, de la idea a la grabación." },
+               { rol: "Editor", texto: "Edito el material para que llegue listo a la audiencia." } ],
+      episodios: [],   // { nombre, rol, fecha, descripcion, foto, link }
+      fotos: [],       // ["foto1.jpg", ...]
+      links: []        // { label: "YouTube", url: "https://..." }
+    }
   ],
 
   // Proyectos: { titulo, descripcion, imagen, link }
@@ -867,6 +922,38 @@ $('#cv-photos').innerHTML = [0,1,2,3].map(i => cp[i] ? img(cp[i],'Cobertura') : 
 $('#rs').innerHTML = [['instagram','Instagram'],['tiktok','TikTok'],['kick','Kick'],['youtube','YouTube']].map(([k,n]) => `
   <a class="rs rv" href="${esc(DATA.udf[k].url)}" target="_blank" rel="noopener">${ico(k)}<b>${n}</b><span>${esc(DATA.udf[k].user)}</span><em>Abrir ${ico('arrow')}</em></a>`).join('');
 
+/* SECCIONES DE PROYECTO (Ver más de Experiencia) */
+$('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
+  const t = d.tema || {};
+  const eps = (d.episodios && d.episodios.length) ? d.episodios : [{},{},{}];
+  const fotos = [0,1,2,3].map(i => (d.fotos||[])[i] ? img(d.fotos[i], d.nombre) : slot('Foto','Agregar imagen')).join('');
+  const links = (d.links && d.links.length) ? d.links.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${ico('arrow')}</a>`).join('') : todo('Agregar links de ' + d.nombre);
+  return `<section id="${esc(d.id)}" class="proj" style="--p-bg:${t.bg||'#F1E8D4'};--p-ink:${t.ink||'#0E1B3D'};--p-ac:${t.ac||'#B9472F'}">
+    <div class="wrap">
+      <div class="proj-mast">
+        <div class="rv"><span class="proj-flag">Proyecto</span><h2>${esc(d.nombre)}</h2>
+          <div class="proj-years">${esc(d.anios||'')}</div>
+          ${d.bajada?`<p class="proj-tag">${esc(d.bajada)}</p>`:''}
+          <ul class="proj-chips">${(d.roles||[]).map(r=>`<li>${esc(r.rol)}</li>`).join('')}</ul></div>
+        <div class="proj-logo rv">${d.logo?`<img src="${esc(d.logo)}" alt="Logo de ${esc(d.nombre)}">`:''}</div>
+      </div>
+      <div class="rv"><div class="proj-h"><h3>De qué se trata</h3><span>El proyecto</span></div>
+        <div class="proj-text">${(d.texto||[]).map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>
+      <div class="rv"><div class="proj-h"><h3>Mi rol</h3><span>Qué hago</span></div>
+        <div class="proj-roles">${(d.roles||[]).map(r=>`<div class="proj-role"><h4>${esc(r.rol)}</h4><p>${esc(r.texto||'')}</p></div>`).join('')}</div></div>
+      <div class="rv"><div class="proj-h"><h3>Entrevistas</h3><span>Conversaciones</span></div>
+        <div class="proj-eps">${eps.map(e=>`<article class="proj-ep">
+          ${e.foto?img(e.foto,e.nombre):slot('Foto de la entrevista','Agregar imagen')}
+          <div class="proj-ep-b"><div class="m"><span>${val(e.rol,'Deporte o rol')}</span><span>${val(e.fecha,'Fecha')}</span></div>
+            <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
+            <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
+            ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>
+      <div class="rv"><div class="proj-h"><h3>Fotos</h3><span>Detrás de cámara</span></div><div class="proj-photos">${fotos}</div></div>
+      <div class="rv"><div class="proj-h"><h3>Dónde verlo</h3><span>Redes y canales</span></div><div class="proj-links">${links}</div></div>
+      <a class="proj-back" href="#experiencia">${ico('arrow')} Volver a Experiencia</a>
+    </div></section>`;
+}).join('');
+
 /* HABILIDADES */
 const SK = [
   ['Periodismo',['Redacción periodística','Investigación','Entrevistas','Análisis deportivo','Cobertura']],
@@ -941,7 +1028,7 @@ $('#form-copy').addEventListener('click', e => copyText($('#form-out-pre').textC
 /* EDAD (se calcula sola a partir del 17/11/2004) */
 (function(){ const n=new Date(), b=new Date(2004,10,17); let a=n.getFullYear()-b.getFullYear();
   if (n.getMonth()<b.getMonth() || (n.getMonth()===b.getMonth() && n.getDate()<b.getDate())) a--;
-  $('#edad').textContent = a + ' años'; })();
+  if ($('#edad')) $('#edad').textContent = a + ' años'; })();
 
 /* NAV */
 const burger = $('#burger'), menu = $('#menu');
