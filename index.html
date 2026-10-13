@@ -71,6 +71,9 @@ section[id]{scroll-margin-top:64px}
 .socials{display:flex;flex-wrap:wrap;gap:10px}
 .soc{display:grid;place-items:center;width:46px;height:46px;border:1.5px solid var(--line-d);color:inherit;text-decoration:none;transition:background .25s,border-color .25s,transform .25s}
 .soc:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+.soc-pill{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:10px 16px;border:1.5px solid var(--line-d);color:inherit;text-decoration:none;font-weight:600;font-size:16px;transition:background .25s,border-color .25s,transform .25s;max-width:100%}
+.soc-pill span{overflow-wrap:anywhere}
+.soc-pill:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
 .soc.pending{border-style:dashed;opacity:.5}
 .soc.pending:hover{background:none;border-color:var(--line-d);transform:none}
 
@@ -439,7 +442,6 @@ section[id]{scroll-margin-top:64px}
       <span class="eyebrow">Portfolio profesional</span>
       <h1 class="hero-name"><span>Nicolás</span><span class="l2">De Los Santos</span></h1>
       <p class="hero-role"><b>Periodismo Deportivo</b><b>Comunicación</b><b>Producción de contenidos</b></p>
-      <p class="hero-quote">Me gusta contar el deporte de cerca, con buenas preguntas y con ganas de ir siempre por una historia más.</p>
       <div class="hero-cta">
         <a class="btn btn-red" href="#proyectos">Ver mi portfolio <svg class="ico" viewBox="0 0 24 24" data-i="arrow"></svg></a>
         <a class="btn btn-line" href="#sobre-mi">Conocerme</a>
@@ -667,14 +669,14 @@ section[id]{scroll-margin-top:64px}
    espacio marcado para completar. Cuando cargues el dato, la web lo usa.
    ===================================================================== */
 const DATA = {
-  email: "",                       // tu email
+  email: "nicodls1711@gmail.com",  // tu email
   cv: "",                          // link a tu CV (PDF)
   fotoHero: "foto-nicolas.png",    // foto de portada
   fotoSobreMi: "",                 // foto personal para "Sobre mí"
   fotoUdf: "",                     // foto principal de Un Rato de Fútbol
 
   // Tus redes personales / profesionales
-  redes: { linkedin: "", instagram: "", tiktok: "", youtube: "", x: "" },
+  redes: { instagram: "nicodls_1711", x: "nicodls1711", tiktok: "nicodls1711", linkedin: "" },  // solo el usuario, sin @
 
   // Redes de Un Rato de Fútbol
   udf: {
@@ -768,12 +770,16 @@ function socialLink(name, url, label) {
   return `<a class="soc${ok?'':' pending'}" ${ok?`href="${esc(url)}" target="_blank" rel="noopener"`:'role="link" aria-disabled="true"'} aria-label="${esc(label)}${ok?'':' (pendiente de agregar)'}" title="${esc(label)}${ok?'':' · pendiente'}">${ico(name)}</a>`;
 }
 const R = DATA.redes;
-const personal = [['linkedin',R.linkedin,'LinkedIn'],['instagram',R.instagram,'Instagram personal'],['tiktok',R.tiktok,'TikTok personal'],['youtube',R.youtube,'YouTube personal'],['x',R.x,'X']];
 const udfs = [['instagram',DATA.udf.instagram.url,'Instagram de Un Rato de Fútbol'],['tiktok',DATA.udf.tiktok.url,'TikTok de Un Rato de Fútbol'],['kick',DATA.udf.kick.url,'Kick de Un Rato de Fútbol'],['youtube',DATA.udf.youtube.url,'YouTube de Un Rato de Fútbol']];
-const mailLink = socialLink('mail', DATA.email ? 'mailto:'+DATA.email : '', 'Email');
-$('#hero-socials').innerHTML = mailLink + personal.slice(0,2).map(p => socialLink(...p)).join('') + udfs.map(p => socialLink(...p)).join('');
+const mine = [];
+if (DATA.email) mine.push(['mail','mailto:'+DATA.email,DATA.email,'Email']);
+if (R.instagram) mine.push(['instagram','https://www.instagram.com/'+R.instagram+'/','@'+R.instagram,'Instagram']);
+if (R.x) mine.push(['x','https://x.com/'+R.x,'@'+R.x,'X']);
+if (R.tiktok) mine.push(['tiktok','https://www.tiktok.com/@'+R.tiktok,'@'+R.tiktok,'TikTok']);
+const pill = ([n,u,t,l]) => `<a class="soc" href="${esc(u)}" ${n==='mail'?'':'target="_blank" rel="noopener"'} aria-label="${esc(l)}: ${esc(t)}" title="${esc(l)}: ${esc(t)}">${ico(n)}</a>`;
+$('#hero-socials').innerHTML = mine.map(pill).join('');
 $('#udf-socials-top').innerHTML = udfs.map(p => socialLink(...p)).join('');
-$('#foot-socials').innerHTML = mailLink + personal.slice(0,2).map(p => socialLink(...p)).join('') + udfs.map(p => socialLink(...p)).join('');
+$('#foot-socials').innerHTML = mine.map(pill).join('');
 
 /* SOBRE MI / UDF fotos */
 $('#about-photo').innerHTML = DATA.fotoSobreMi ? img(DATA.fotoSobreMi, 'Foto personal de Nicolás') : slot('Tu foto personal', 'Vertical 4:5. Una en la que te sientas cómodo', '4/5');
@@ -905,9 +911,8 @@ async function copyText(t, btn) {
 }
 const ctRows = [];
 ctRows.push(`<li>${ico('mail')}<div><small>Email</small>${DATA.email?`<span class="v" id="mail-v">${esc(DATA.email)}</span>`:`<span class="v">${todo('Agregar email')}</span>`}</div>${DATA.email?'<button class="copy" type="button" id="mail-copy">Copiar</button>':''}</li>`);
-ctRows.push(`<li>${ico('instagram')}<div><small>Instagram · Un Rato de Fútbol</small><a href="${DATA.udf.instagram.url}" target="_blank" rel="noopener">${esc(DATA.udf.instagram.user)}</a></div></li>`);
-ctRows.push(`<li>${ico('linkedin')}<div><small>LinkedIn</small>${R.linkedin?`<a href="${esc(R.linkedin)}" target="_blank" rel="noopener">${esc(R.linkedin.replace(/^https?:\/\/(www\.)?/,''))}</a>`:`<span class="v">${todo('Agregar LinkedIn')}</span>`}</div></li>`);
-ctRows.push(`<li>${ico('youtube')}<div><small>Otras redes</small><a href="${DATA.udf.youtube.url}" target="_blank" rel="noopener">YouTube · ${esc(DATA.udf.youtube.user)}</a>${' · '}<a href="${DATA.udf.tiktok.url}" target="_blank" rel="noopener">TikTok</a>${' · '}<a href="${DATA.udf.kick.url}" target="_blank" rel="noopener">Kick</a></div></li>`);
+mine.filter(m=>m[0]!=='mail').forEach(([n,u,t,l]) => ctRows.push(`<li>${ico(n)}<div><small>${esc(l)}</small><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a></div></li>`));
+ctRows.push(`<li>${ico('instagram')}<div><small>Un Rato de Fútbol</small><a href="${DATA.udf.instagram.url}" target="_blank" rel="noopener">Instagram</a>${' · '}<a href="${DATA.udf.tiktok.url}" target="_blank" rel="noopener">TikTok</a>${' · '}<a href="${DATA.udf.kick.url}" target="_blank" rel="noopener">Kick</a>${' · '}<a href="${DATA.udf.youtube.url}" target="_blank" rel="noopener">YouTube</a></div></li>`);
 if (DATA.cv) ctRows.push(`<li>${ico('arrow')}<div><small>Currículum</small><a href="${esc(DATA.cv)}" target="_blank" rel="noopener">Ver mi CV</a></div></li>`);
 $('#ct-list').innerHTML = ctRows.join('');
 $('#mail-copy')?.addEventListener('click', e => copyText(DATA.email, e.currentTarget));
