@@ -298,6 +298,9 @@ section[id]{scroll-margin-top:64px}
 .role-list li::before{content:"";width:10px;height:10px;background:var(--c-bordo);flex:none;transform:rotate(45deg)}
 .role-list li:hover::before{background:var(--c-cream)}
 .role-ph{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.role-ph.con-fotos{grid-template-columns:1fr}
+.role-ph img{width:100%;aspect-ratio:16/9;object-fit:cover;border:3px solid var(--c-ink);box-shadow:8px 8px 0 var(--c-bordo)}
+.role-ph.con-fotos{gap:22px;padding:0 8px 8px 0}
 .role-ph .slot{aspect-ratio:1/1}
 .role-ph .slot:first-child{grid-column:1/-1;aspect-ratio:16/9}
 @media(max-width:900px){.role-wrap{grid-template-columns:1fr}}
@@ -737,7 +740,7 @@ const DATA = {
   },
 
   // Fotos del rol en Un Rato de Fútbol: ["foto1.jpg", ...]
-  fotosRol: [],
+  fotosRol: ["rol-entrevista.jpg","rol-transmision.jpg"],
 
   // Formación: una entrada por etapa
   formacion: [
@@ -940,7 +943,9 @@ if ($('#pj')) $('#pj').innerHTML = DATA.proyectos.map((p,i) => `
 
 /* UDF: rol fotos */
 const rp = DATA.fotosRol;
-$('#role-ph').innerHTML = [0,1,2].map(i => rp[i] ? img(rp[i],'Trabajo en Un Rato de Fútbol') : slot('Foto de trabajo','Ejemplo de tu rol')).join('');
+const rolAlt = ['Entrevista en Un Rato de Fútbol','Transmisión de Un Rato de Fútbol'];
+$('#role-ph').classList.toggle('con-fotos', rp.length > 0);
+$('#role-ph').innerHTML = rp.length ? rp.map((f,i) => img(f, rolAlt[i] || 'Trabajo en Un Rato de Fútbol')).join('') : [0,1,2].map(() => slot('Foto de trabajo','Ejemplo de tu rol')).join('');
 
 /* UDF: entrevistas */
 const ivs = DATA.entrevistas.length ? DATA.entrevistas : [{},{},{}];
