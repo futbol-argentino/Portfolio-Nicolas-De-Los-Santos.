@@ -498,7 +498,6 @@ section[id]{scroll-margin-top:64px}
       <li><a href="#inicio" data-s="inicio">Inicio</a></li>
       <li><a href="#sobre-mi" data-s="sobre-mi">Sobre mí</a></li>
       <li><a href="#experiencia" data-s="experiencia">Experiencia</a></li>
-      <li><a href="#proyectos" data-s="proyectos">Proyectos</a></li>
       <li><a class="udf-link" href="#un-rato-de-futbol" data-s="un-rato-de-futbol">Un Rato de Fútbol</a></li>
       <li><a href="#contacto" data-s="contacto">Contacto</a></li>
     </ul>
@@ -514,7 +513,7 @@ section[id]{scroll-margin-top:64px}
       <h1 class="hero-name"><span>Nicolás</span><span class="l2">De Los Santos</span></h1>
       <p class="hero-role"><b>Periodismo Deportivo</b><b>Comunicación</b><b>Producción de contenidos</b></p>
       <div class="hero-cta">
-        <a class="btn btn-red" href="#proyectos">Ver mi portfolio <svg class="ico" viewBox="0 0 24 24" data-i="arrow"></svg></a>
+        <a class="btn btn-red" href="#experiencia">Ver mi portfolio <svg class="ico" viewBox="0 0 24 24" data-i="arrow"></svg></a>
         <a class="btn btn-line" href="#sobre-mi">Conocerme</a>
       </div>
       <div class="socials" id="hero-socials"></div>
@@ -567,15 +566,6 @@ section[id]{scroll-margin-top:64px}
     <div class="sec-head rv"><span class="eyebrow" style="color:var(--bordo)">Trayectoria</span><h2 class="h2">Experiencia</h2>
       <p class="lead">Medios, proyectos y coberturas donde ya estoy poniendo en práctica lo que aprendo.</p></div>
     <div class="xp-list" id="xp"></div>
-  </div>
-</section>
-
-<!-- 5. PROYECTOS -->
-<section id="proyectos" class="sec dark">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Trabajos</span><h2 class="h2">Proyectos</h2>
-      <p class="lead">Producciones, entrevistas, programas y contenidos. Cada tarjeta guarda un trabajo propio.</p></div>
-    <div class="pj-grid" id="pj"></div>
   </div>
 </section>
 
@@ -711,7 +701,7 @@ section[id]{scroll-margin-top:64px}
     </div>
     <ul class="foot-links">
       <li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#experiencia">Experiencia</a></li>
-      <li><a href="#proyectos">Proyectos</a></li><li><a href="#un-rato-de-futbol">Un Rato de Fútbol</a></li><li><a href="#contacto">Contacto</a></li>
+      <li><a href="#un-rato-de-futbol">Un Rato de Fútbol</a></li><li><a href="#contacto">Contacto</a></li>
     </ul>
     <small>© 2026 Nicolás De Los Santos. Todos los derechos reservados.</small>
   </div>
@@ -935,7 +925,7 @@ $('#xp').innerHTML = DATA.experiencias.map((x,i) => {
 
 /* PROYECTOS */
 const wideIdx = [0, DATA.proyectos.length-1];
-$('#pj').innerHTML = DATA.proyectos.map((p,i) => `
+if ($('#pj')) $('#pj').innerHTML = DATA.proyectos.map((p,i) => `
   <article class="pj rv${wideIdx.includes(i)?' wide':''}">
     ${p.imagen?img(p.imagen,p.titulo).replace('<img','<img style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"'):slot('Imagen del proyecto','Agregar foto o captura')}
     <div class="pj-in"><h3>${esc(p.titulo)}</h3>
