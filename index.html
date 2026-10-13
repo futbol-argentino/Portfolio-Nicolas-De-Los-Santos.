@@ -208,6 +208,9 @@ section[id]{scroll-margin-top:64px}
 .xp-logo::after{content:"";position:absolute;left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);border:2px solid rgba(241,232,212,.12);border-radius:50%}
 .xp-logo img{position:relative;z-index:1;width:100%;max-width:420px;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .xp:hover .xp-logo img{transform:scale(1.04) rotate(-1deg)}
+.xp-logo.light{background:#E6E1BE}
+.xp-logo.light::before,.xp-logo.light::after{display:none}
+.xp-logo.light img{max-width:320px;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%);mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%)}
 .chips{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .chips li{padding:5px 11px;border:1.5px solid var(--navy);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:14px;line-height:1.2;transition:background .2s,color .2s}
 .chips li:hover{background:var(--navy);color:#fff}
@@ -700,7 +703,11 @@ const DATA = {
       rol: ["Producción","Entrevistas","Transmisiones","Comentarista"],
       descripcion: "Proyecto de comunicación deportiva en el que participo activamente: producción, entrevistas, coberturas y contenido digital.",
       contenido: "Transmisiones, entrevistas, coberturas y contenido para redes.", link: "#un-rato-de-futbol", logo: "logo-urdf.png", fotos: [] },
-    { }, { }
+    { nombre: "Post Partido", fecha: "2024 – 2026",
+      rol: ["Entrevistador","Productor","Editor"],
+      descripcion: "Proyecto de entrevistas a deportistas que pone el foco en lo que pasa fuera del deporte: lo cotidiano y la vida de cada deportista.",
+      contenido: "Entrevistas a deportistas.", link: "", logo: "post-partido.png", logoClass: "light", fotos: [] },
+    { }
   ],
 
   // Proyectos: { titulo, descripcion, imagen, link }
@@ -804,7 +811,7 @@ if ($('#tl')) $('#tl').innerHTML = DATA.formacion.map(f => `
 
 /* EXPERIENCIA */
 $('#xp').innerHTML = DATA.experiencias.map((x,i) => {
-  const media = x.logo ? `<div class="xp-media xp-logo"><img src="${esc(x.logo)}" alt="Logo de ${esc(x.nombre)}"></div>` : null;
+  const media = x.logo ? `<div class="xp-media xp-logo ${x.logoClass||''}"><img src="${esc(x.logo)}" alt="Logo de ${esc(x.nombre)}"></div>` : null;
   const fotos = (x.fotos && x.fotos.length) ? x.fotos.slice(0,3).map(f => img(f,x.nombre)).join('') : [slot('Foto','Agregar imagen'),slot('Foto',''),slot('Foto','')].join('');
   return `<article class="xp rv">
     ${media || `<div class="xp-media">${fotos}</div>`}
