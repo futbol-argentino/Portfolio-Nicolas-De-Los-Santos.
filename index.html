@@ -413,7 +413,7 @@ section[id]{scroll-margin-top:64px}
 .proj-eps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .proj-ep{border:3px solid var(--p-ink);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
 .proj-ep:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--p-ac)}
-.proj-ep .slot,.proj-ep img{aspect-ratio:4/3;width:100%;object-fit:cover;border-width:0 0 3px 0;border-style:solid;border-color:var(--p-ink)}
+.proj-ep .slot,.proj-ep img{aspect-ratio:16/9;width:100%;object-fit:cover;border-width:0 0 3px 0;border-style:solid;border-color:var(--p-ink)}
 .proj-ep-b{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
 .proj-ep-b .m{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
 .proj-ep-b h4{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:28px;line-height:1}
@@ -656,7 +656,6 @@ section[id]{scroll-margin-top:64px}
     <div class="u-block" style="padding-top:0">
       <div class="u-head"><h3>Coberturas y transmisiones</h3><span>Planilla de partidos</span></div>
       <div class="cv-grid" id="cv"></div>
-      <div class="cv-photos" id="cv-photos"></div>
     </div>
 
     <div class="u-block" style="padding-top:0">
@@ -809,7 +808,17 @@ const DATA = {
       roles: [ { rol: "Entrevistador", texto: "Preparo y conduzco las conversaciones con los deportistas." },
                { rol: "Productor", texto: "Organizo cada entrevista, de la idea a la grabación." },
                { rol: "Editor", texto: "Edito el material para que llegue listo a la audiencia." } ],
-      episodios: [],   // { nombre, rol, fecha, descripcion, foto, link }
+      episodios: [   // { nombre, rol (deporte), fecha, descripcion, foto, link }
+        { nombre: "Ignacio Pais Mayán", rol: "Fútbol", fecha: "25 de abril de 2025",
+          descripcion: "Actual jugador de Banfield, exjugador de Racing Club, Antequera, Cartagena, etc.",
+          foto: "pm-pais.jpg", link: "https://youtu.be/LthPlDC8ZJU?si=sB5Tk8Ef_LRyOgnh" },
+        { nombre: "Diego Vallejo Folgueira", rol: "Rally", fecha: "29 de agosto de 2025",
+          descripcion: "Uno de los copilotos más reconocidos y respetados del automovilismo español. Participó en numerosos Rally Dakar y WRC.",
+          foto: "pm-vallejo.jpg", link: "https://youtu.be/HNdWgWMMack?si=BKbFJ_ksfqZ3bgKa" },
+        { nombre: "Gabriel Ponce de León", rol: "Automovilismo", fecha: "5 de septiembre de 2025",
+          descripcion: "Uno de los pilotos más prestigiosos de la actualidad, hoy en TC2000, con gran trayectoria en el automovilismo nacional. Tricampeón de TC2000.",
+          foto: "pm-ponce.jpg", link: "https://youtu.be/5hYQ_bjp2Wk?si=9H7fYsZS6e5deYup" }
+      ],
       fotos: [],       // ["foto1.jpg", ...]
       links: []        // { label: "YouTube", url: "https://..." }
     }
@@ -874,7 +883,6 @@ const DATA = {
     { n:8, a:"Francia", ca:"fr", b:"España", cb:"es", fecha:"2026-07-14", fase:"Mundial 2026 · Semifinal", link:"https://www.youtube.com/live/w2gQKA7TDxA?si=QG8DbAxozYWJdHTW" },
     { n:9, a:"Argentina", ca:"ar", b:"Inglaterra", cb:"gb-eng", fecha:"2026-07-15", fase:"Mundial 2026 · Semifinal", link:"https://www.youtube.com/live/q7cPQr643qA?si=u747TVqDqFG4W3N7" }
   ],
-  fotosCoberturas: [],
 
   // Galería: { cat: "PERIODISMO|ENTREVISTAS|TRANSMISIONES|REDES|PROYECTOS", tipo: "foto|video", src: "archivo.jpg", titulo: "", link: "" }
   galeria: [],
@@ -1045,8 +1053,6 @@ $('#cv').innerHTML = cvs.map((c,i) => {
       <div><div class="tk-bar"></div><div class="tk-no">N° ${String(c.n||i+1).padStart(3,'0')}</div></div>
     </div>
   </div></article>`; }).join('');
-const cp = DATA.fotosCoberturas;
-$('#cv-photos').innerHTML = [0,1,2,3].map(i => cp[i] ? img(cp[i],'Cobertura') : slot('Estadio / transmisión','Agregar foto')).join('');
 
 /* UDF: redes */
 $('#rs').innerHTML = [['instagram','Instagram'],['tiktok','TikTok'],['kick','Kick'],['youtube','YouTube']].map(([k,n]) => `
