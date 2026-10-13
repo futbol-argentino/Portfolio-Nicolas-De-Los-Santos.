@@ -211,6 +211,9 @@ section[id]{scroll-margin-top:64px}
 .xp-logo.light{background:#E6E1BE}
 .xp-logo.light::before,.xp-logo.light::after{display:none}
 .xp-logo.light img{max-width:320px;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%);mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%)}
+.xp-logo.navy{background:#0E122D}
+.xp-logo.navy::before,.xp-logo.navy::after{display:none}
+.xp-logo.navy img{max-width:440px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%);mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%)}
 .chips{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .chips li{padding:5px 11px;border:1.5px solid var(--navy);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:14px;line-height:1.2;transition:background .2s,color .2s}
 .chips li:hover{background:var(--navy);color:#fff}
@@ -340,14 +343,16 @@ section[id]{scroll-margin-top:64px}
 .proj .wrap{display:grid;gap:clamp(52px,7vw,88px)}
 .proj .slot{color:var(--p-ink);border-color:color-mix(in srgb,var(--p-ink) 40%,transparent);background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--p-ink) 7%,transparent) 0 10px,transparent 10px 20px)}
 .proj-mast{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:center}
-.proj-flag{display:inline-block;background:var(--p-ac);color:#fff;font-family:var(--f-display);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:15px;padding:6px 14px}
+.proj-flag{display:inline-block;background:var(--p-ac);color:var(--p-bg);font-family:var(--f-display);font-weight:800;letter-spacing:.2em;text-transform:uppercase;font-size:15px;padding:6px 14px}
 .proj h2{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.88;font-size:clamp(56px,10vw,140px);margin-top:20px}
+.proj h2.chico{font-size:clamp(44px,7.4vw,104px)}
+.proj-logo.ancho img{-webkit-mask-image:none;mask-image:none;max-width:min(100%,560px)}
 .proj-years{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;font-size:clamp(18px,2.2vw,26px);color:var(--p-ac);margin-top:16px}
 .proj-tag{font-size:clamp(18px,2vw,22px);margin-top:14px;max-width:34ch;font-weight:500}
 .proj-chips{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .proj-chips li{padding:6px 13px;border:1.5px solid var(--p-ink);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:15px}
 .proj-logo{display:grid;place-items:center}
-.proj-logo img{width:100%;max-width:440px;height:auto;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%);mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%)}
+.proj-logo img{width:100%;max-width:min(100%,520px);height:auto;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%);mask-image:radial-gradient(circle at 50% 50%,#000 62%,transparent 74%)}
 .proj-h{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:4px solid var(--p-ink);padding-bottom:12px;margin-bottom:28px}
 .proj-h h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(34px,5vw,58px);line-height:.95}
 .proj-h span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
@@ -366,12 +371,12 @@ section[id]{scroll-margin-top:64px}
 .proj-ep-b .m{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
 .proj-ep-b h4{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:28px;line-height:1}
 .proj-ep-b .btn{margin-top:auto;align-self:flex-start;padding:11px 18px;font-size:15px;background:var(--p-ink);color:var(--p-bg)}
-.proj-ep-b .btn:hover{background:var(--p-ac);color:#fff}
+.proj-ep-b .btn:hover{background:var(--p-ac);color:var(--p-bg)}
 .proj-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .proj-photos .slot,.proj-photos img{aspect-ratio:4/3;width:100%;object-fit:cover}
 .proj-links{display:flex;flex-wrap:wrap;gap:12px}
 .proj-links .btn{background:var(--p-ink);color:var(--p-bg);padding:13px 22px;font-size:16px}
-.proj-links .btn:hover{background:var(--p-ac);color:#fff}
+.proj-links .btn:hover{background:var(--p-ac);color:var(--p-bg)}
 .proj-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:16px;text-decoration:none;border-bottom:2px solid var(--p-ac);padding-bottom:3px;justify-self:start}
 .proj-back svg{width:18px;height:18px;transform:rotate(180deg);transition:transform .25s}
 .proj-back:hover svg{transform:rotate(180deg) translateX(6px)}
@@ -745,7 +750,10 @@ const DATA = {
       rol: ["Entrevistador","Productor","Editor"],
       descripcion: "Proyecto de entrevistas a deportistas que pone el foco en lo que pasa fuera del deporte: lo cotidiano y la vida de cada deportista.",
       contenido: "Entrevistas a deportistas.", link: "#post-partido", logo: "post-partido.png", logoClass: "light", fotos: [] },
-    { }
+    { nombre: "Base de Datos del Fútbol Argentino", fecha: "2026",
+      rol: ["Creador de la página","Recopilación de datos","Investigación"],
+      descripcion: "Proyecto a largo plazo para crear la mayor base de datos del fútbol argentino, donde cualquier información que necesites esté a mano, de forma clara y rápida.",
+      contenido: "Datos e investigación del fútbol argentino.", link: "#base-de-datos", logo: "base-datos.png", logoClass: "navy", fotos: [] }
   ],
 
   // Secciones de detalle de cada experiencia (el botón "Ver más" de Experiencia lleva acá).
@@ -762,6 +770,19 @@ const DATA = {
       episodios: [],   // { nombre, rol, fecha, descripcion, foto, link }
       fotos: [],       // ["foto1.jpg", ...]
       links: []        // { label: "YouTube", url: "https://..." }
+    }
+    ,{ id: "base-de-datos", nombre: "Base de Datos del Fútbol Argentino", anios: "2026", logo: "base-datos.png",
+      tema: { bg: "#0E122D", ink: "#EAF2FF", ac: "#4DA3E0" },
+      bajada: "Toda la información del fútbol argentino, en un solo lugar.",
+      texto: ["Es un proyecto a largo plazo con un gran objetivo: crear la mayor base de datos del fútbol argentino.",
+              "La idea es que cualquier información que necesites esté ahí, de forma clara y rápida."],
+      roles: [ { rol: "Creador de la página", texto: "Armo la página donde vive la base de datos." },
+               { rol: "Recopilación de datos", texto: "Reúno y ordeno la información del fútbol argentino." },
+               { rol: "Investigación", texto: "Investigo cada dato que se suma a la base." } ],
+      episodios: false,                       // este proyecto no lleva entrevistas
+      tituloChico: true, logoAncho: true,     // nombre largo y logo apaisado
+      tituloFotos: "Capturas", subFotos: "La página por dentro", fotos: [],
+      tituloLinks: "Entrar a la base de datos", subLinks: "Enlace", links: []
     }
   ],
 
@@ -926,30 +947,31 @@ $('#rs').innerHTML = [['instagram','Instagram'],['tiktok','TikTok'],['kick','Kic
 $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
   const t = d.tema || {};
   const eps = (d.episodios && d.episodios.length) ? d.episodios : [{},{},{}];
+  const conEps = d.episodios !== false;
   const fotos = [0,1,2,3].map(i => (d.fotos||[])[i] ? img(d.fotos[i], d.nombre) : slot('Foto','Agregar imagen')).join('');
-  const links = (d.links && d.links.length) ? d.links.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${ico('arrow')}</a>`).join('') : todo('Agregar links de ' + d.nombre);
+  const links = (d.links && d.links.length) ? d.links.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${ico('arrow')}</a>`).join('') : todo('Agregar link');
   return `<section id="${esc(d.id)}" class="proj" style="--p-bg:${t.bg||'#F1E8D4'};--p-ink:${t.ink||'#0E1B3D'};--p-ac:${t.ac||'#B9472F'}">
     <div class="wrap">
       <div class="proj-mast">
-        <div class="rv"><span class="proj-flag">Proyecto</span><h2>${esc(d.nombre)}</h2>
+        <div class="rv"><span class="proj-flag">Proyecto</span><h2${d.tituloChico?' class="chico"':''}>${esc(d.nombre)}</h2>
           <div class="proj-years">${esc(d.anios||'')}</div>
           ${d.bajada?`<p class="proj-tag">${esc(d.bajada)}</p>`:''}
           <ul class="proj-chips">${(d.roles||[]).map(r=>`<li>${esc(r.rol)}</li>`).join('')}</ul></div>
-        <div class="proj-logo rv">${d.logo?`<img src="${esc(d.logo)}" alt="Logo de ${esc(d.nombre)}">`:''}</div>
+        <div class="proj-logo rv${d.logoAncho?' ancho':''}">${d.logo?`<img src="${esc(d.logo)}" alt="Logo de ${esc(d.nombre)}">`:''}</div>
       </div>
       <div class="rv"><div class="proj-h"><h3>De qué se trata</h3><span>El proyecto</span></div>
         <div class="proj-text">${(d.texto||[]).map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>
       <div class="rv"><div class="proj-h"><h3>Mi rol</h3><span>Qué hago</span></div>
         <div class="proj-roles">${(d.roles||[]).map(r=>`<div class="proj-role"><h4>${esc(r.rol)}</h4><p>${esc(r.texto||'')}</p></div>`).join('')}</div></div>
-      <div class="rv"><div class="proj-h"><h3>Entrevistas</h3><span>Conversaciones</span></div>
+      ${conEps?`<div class="rv"><div class="proj-h"><h3>Entrevistas</h3><span>Conversaciones</span></div>
         <div class="proj-eps">${eps.map(e=>`<article class="proj-ep">
           ${e.foto?img(e.foto,e.nombre):slot('Foto de la entrevista','Agregar imagen')}
           <div class="proj-ep-b"><div class="m"><span>${val(e.rol,'Deporte o rol')}</span><span>${val(e.fecha,'Fecha')}</span></div>
             <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
             <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
-            ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>
-      <div class="rv"><div class="proj-h"><h3>Fotos</h3><span>Detrás de cámara</span></div><div class="proj-photos">${fotos}</div></div>
-      <div class="rv"><div class="proj-h"><h3>Dónde verlo</h3><span>Redes y canales</span></div><div class="proj-links">${links}</div></div>
+            ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>`:''}
+      <div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos">${fotos}</div></div>
+      <div class="rv"><div class="proj-h"><h3>${esc(d.tituloLinks||'Dónde verlo')}</h3><span>${esc(d.subLinks||'Redes y canales')}</span></div><div class="proj-links">${links}</div></div>
       <a class="proj-back" href="#experiencia">${ico('arrow')} Volver a Experiencia</a>
     </div></section>`;
 }).join('');
