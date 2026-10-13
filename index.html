@@ -214,6 +214,9 @@ section[id]{scroll-margin-top:64px}
 .xp-logo.navy{background:#0E122D}
 .xp-logo.navy::before,.xp-logo.navy::after{display:none}
 .xp-logo.navy img{max-width:440px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%);mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%)}
+.xp-logo.negro{background:#07080A}
+.xp-logo.negro::before,.xp-logo.negro::after{display:none}
+.xp-logo.negro img{max-width:440px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%);mask-image:radial-gradient(ellipse at 50% 50%,#000 70%,transparent 98%)}
 .chips{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .chips li{padding:5px 11px;border:1.5px solid var(--navy);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:14px;line-height:1.2;transition:background .2s,color .2s}
 .chips li:hover{background:var(--navy);color:#fff}
@@ -358,6 +361,15 @@ section[id]{scroll-margin-top:64px}
 .proj-h span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
 .proj-text p{font-size:clamp(19px,2vw,23px);line-height:1.6;max-width:60ch;margin-top:16px}
 .proj-text p:first-child{margin-top:0;font-weight:600;font-size:clamp(22px,2.6vw,30px);line-height:1.3}
+.proj-route{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(12px,3vw,32px);align-items:stretch}
+.proj-stop{border:3px solid var(--p-ink);padding:clamp(20px,3vw,34px);display:flex;flex-direction:column;gap:8px;justify-content:center}
+.proj-stop span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
+.proj-stop b{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(32px,5vw,64px);line-height:.95}
+.proj-stop.fin{background:var(--p-ac);border-color:var(--p-ac);color:var(--p-bg)}
+.proj-stop.fin span{color:var(--p-bg);opacity:.85}
+.proj-arrow{display:grid;place-items:center}
+.proj-arrow svg{width:clamp(34px,5vw,64px);height:clamp(34px,5vw,64px);stroke-width:2.4;color:var(--p-ac)}
+@media(max-width:700px){.proj-route{grid-template-columns:1fr}.proj-arrow svg{transform:rotate(90deg)}}
 .proj-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .proj-role{background:var(--p-ink);color:var(--p-bg);padding:26px 22px 28px;transition:transform .3s,background .3s}
 .proj-role:hover{transform:translateY(-6px);background:var(--p-ac)}
@@ -753,7 +765,11 @@ const DATA = {
     { nombre: "Base de Datos del Fútbol Argentino", fecha: "2026",
       rol: ["Creador de la página","Recopilación de datos","Investigación"],
       descripcion: "Proyecto a largo plazo para crear la mayor base de datos del fútbol argentino, donde cualquier información que necesites esté a mano, de forma clara y rápida.",
-      contenido: "Datos e investigación del fútbol argentino.", link: "#base-de-datos", logo: "base-datos.png", logoClass: "navy", fotos: [] }
+      contenido: "Datos e investigación del fútbol argentino.", link: "#base-de-datos", logo: "base-datos.png", logoClass: "navy", fotos: [] },
+    { nombre: "Línea de Boxes", fecha: "2026",
+      rol: ["Creador de la página","Encargado de subir todo el contenido","Redactor de noticias"],
+      descripcion: "Página innovadora para informarte sobre toda la actualidad del automovilismo, del Zonal de Santa Fe a la Fórmula 1, con los 7 mejores periodistas de la Ciudad de Santa Fe detrás.",
+      contenido: "Noticias de automovilismo.", link: "#linea-de-boxes", logo: "linea-de-boxes.png", logoClass: "negro", fotos: [] }
   ],
 
   // Secciones de detalle de cada experiencia (el botón "Ver más" de Experiencia lleva acá).
@@ -783,6 +799,22 @@ const DATA = {
       tituloChico: true, logoAncho: true,     // nombre largo y logo apaisado
       tituloFotos: "Capturas", subFotos: "La página por dentro", fotos: [],
       tituloLinks: "Entrar a la base de datos", subLinks: "Enlace", links: []
+    },
+    { id: "linea-de-boxes", nombre: "Línea de Boxes", anios: "2026", logo: "linea-de-boxes.png",
+      tema: { bg: "#07080A", ink: "#F2EFE8", ac: "#E10B17" },
+      bajada: "Toda la actualidad del automovilismo.",
+      texto: ["Es una página innovadora para informarte sobre toda la actualidad del automovilismo.",
+              "Detrás están los 7 mejores periodistas de la Ciudad de Santa Fe."],
+      recorrido: { titulo: "De Santa Fe a la Fórmula 1",
+                   desde: { etiqueta: "Donde empieza", nombre: "Zonal de Santa Fe" },
+                   hasta: { etiqueta: "La categoría madre", nombre: "Fórmula 1" } },
+      roles: [ { rol: "Creador de la página", texto: "Armo la página donde se publica toda la información." },
+               { rol: "Encargado de subir todo el contenido", texto: "Subo y mantengo al día cada publicación." },
+               { rol: "Redactor de noticias", texto: "Escribo las noticias del automovilismo." } ],
+      episodios: false,
+      tituloChico: true, logoAncho: true,
+      tituloFotos: "Capturas", subFotos: "La página por dentro", fotos: [],
+      tituloLinks: "Entrar a Línea de Boxes", subLinks: "Enlace", links: []
     }
   ],
 
@@ -961,6 +993,10 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
       </div>
       <div class="rv"><div class="proj-h"><h3>De qué se trata</h3><span>El proyecto</span></div>
         <div class="proj-text">${(d.texto||[]).map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>
+      ${d.recorrido?`<div class="rv"><div class="proj-h"><h3>${esc(d.recorrido.titulo)}</h3><span>Cobertura</span></div>
+        <div class="proj-route"><div class="proj-stop"><span>${esc(d.recorrido.desde.etiqueta)}</span><b>${esc(d.recorrido.desde.nombre)}</b></div>
+          <div class="proj-arrow">${ico('arrow')}</div>
+          <div class="proj-stop fin"><span>${esc(d.recorrido.hasta.etiqueta)}</span><b>${esc(d.recorrido.hasta.nombre)}</b></div></div></div>`:''}
       <div class="rv"><div class="proj-h"><h3>Mi rol</h3><span>Qué hago</span></div>
         <div class="proj-roles">${(d.roles||[]).map(r=>`<div class="proj-role"><h4>${esc(r.rol)}</h4><p>${esc(r.texto||'')}</p></div>`).join('')}</div></div>
       ${conEps?`<div class="rv"><div class="proj-h"><h3>Entrevistas</h3><span>Conversaciones</span></div>
