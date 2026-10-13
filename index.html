@@ -203,6 +203,14 @@ section[id]{scroll-margin-top:64px}
 .xp-media .slot:first-child{grid-column:1/-1;min-height:150px}
 .xp-body{padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:10px}
 .xp-meta{display:flex;flex-wrap:wrap;gap:8px 14px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--bordo)}
+.xp-logo{display:grid;grid-template-columns:minmax(0,1fr);gap:0;place-items:center;padding:clamp(20px,4vw,44px);background:radial-gradient(420px 260px at 50% 55%,rgba(138,28,48,.35),transparent 70%),#0E1B3D;position:relative;overflow:hidden}
+.xp-logo::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(241,232,212,.12)}
+.xp-logo::after{content:"";position:absolute;left:50%;top:50%;width:150px;height:150px;transform:translate(-50%,-50%);border:2px solid rgba(241,232,212,.12);border-radius:50%}
+.xp-logo img{position:relative;z-index:1;width:100%;max-width:420px;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.xp:hover .xp-logo img{transform:scale(1.04) rotate(-1deg)}
+.chips{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.chips li{padding:5px 11px;border:1.5px solid var(--navy);font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:14px;line-height:1.2;transition:background .2s,color .2s}
+.chips li:hover{background:var(--navy);color:#fff}
 .xp-body h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(30px,3.6vw,44px);line-height:.95}
 .xp-body .role{font-weight:700;font-size:17px}
 .xp-body p{color:#3A4562;font-size:16.5px}
@@ -688,7 +696,10 @@ const DATA = {
 
   // Experiencia: { nombre, rol, fecha, descripcion, contenido, link, fotos:[] }
   experiencias: [
-    { nombre: "Un Rato de Fútbol", rol: "", fecha: "", descripcion: "Proyecto de comunicación deportiva en el que participo activamente: producción, entrevistas, coberturas y contenido digital.", contenido: "", link: "#un-rato-de-futbol", fotos: [] },
+    { nombre: "Un Rato de Fútbol", fecha: "2026",
+      rol: ["Producción","Periodismo","Entrevistas","Investigación","Redes sociales","Transmisiones","Generación de contenido","Contacto con clubes y protagonistas"],
+      descripcion: "Proyecto de comunicación deportiva en el que participo activamente: producción, entrevistas, coberturas y contenido digital.",
+      contenido: "Transmisiones, entrevistas, coberturas y contenido para redes.", link: "#un-rato-de-futbol", logo: "logo-urdf.png", fotos: [] },
     { }, { }
   ],
 
@@ -793,13 +804,14 @@ if ($('#tl')) $('#tl').innerHTML = DATA.formacion.map(f => `
 
 /* EXPERIENCIA */
 $('#xp').innerHTML = DATA.experiencias.map((x,i) => {
+  const media = x.logo ? `<div class="xp-media xp-logo"><img src="${esc(x.logo)}" alt="Logo de ${esc(x.nombre)}"></div>` : null;
   const fotos = (x.fotos && x.fotos.length) ? x.fotos.slice(0,3).map(f => img(f,x.nombre)).join('') : [slot('Foto','Agregar imagen'),slot('Foto',''),slot('Foto','')].join('');
   return `<article class="xp rv">
-    <div class="xp-media">${fotos}</div>
+    ${media || `<div class="xp-media">${fotos}</div>`}
     <div class="xp-body">
       <div class="xp-meta"><span>${val(x.fecha,'Agregar fecha')}</span></div>
       <h3>${val(x.nombre,'Nombre del medio o proyecto')}</h3>
-      <div class="role">${x.rol?esc(x.rol):todo('Rol desempeñado')}</div>
+      <div class="role">${Array.isArray(x.rol)?`<ul class="chips">${x.rol.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`:(x.rol?esc(x.rol):todo('Rol desempeñado'))}</div>
       <p>${x.descripcion?esc(x.descripcion):todo('Descripción de la experiencia')}</p>
       <div class="prod"><b>Contenido producido</b>${val(x.contenido,'Entrevistas, notas, transmisiones…')}</div>
       ${x.link?`<a class="btn btn-dark" href="${esc(x.link)}" ${isExt(x.link)?'target="_blank" rel="noopener"':''}>Ver más ${ico('arrow')}</a>`:''}
