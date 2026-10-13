@@ -427,7 +427,6 @@ section[id]{scroll-margin-top:64px}
     <ul class="menu" id="menu">
       <li><a href="#inicio" data-s="inicio">Inicio</a></li>
       <li><a href="#sobre-mi" data-s="sobre-mi">Sobre mí</a></li>
-      <li><a href="#formacion" data-s="formacion">Formación</a></li>
       <li><a href="#experiencia" data-s="experiencia">Experiencia</a></li>
       <li><a href="#proyectos" data-s="proyectos">Proyectos</a></li>
       <li><a class="udf-link" href="#un-rato-de-futbol" data-s="un-rato-de-futbol">Un Rato de Fútbol</a></li>
@@ -496,15 +495,6 @@ section[id]{scroll-margin-top:64px}
       <p>Hoy, mientras me formo para convertir esa pasión en mi profesión, busco construir mi propio camino, aprendiendo, creando y creciendo con cada experiencia. En ese recorrido nació Un Rato de Fútbol, un proyecto que me permite transformar todo lo que siento por este deporte en algo propio.</p>
       <blockquote>Todo empezó de la mano de mi papá, en una cancha. Hoy, sueño con hacer del fútbol una forma de vida.</blockquote>
     </div>
-  </div>
-</section>
-
-<!-- 3. FORMACION -->
-<section id="formacion" class="sec dark">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Formación académica</span><h2 class="h2">Formación</h2>
-      <p class="lead">Mi carrera de Periodismo Deportivo, etapa por etapa: lo que estudié, lo que aprendí y lo que ya puse en práctica.</p></div>
-    <div class="tl" id="tl"></div>
   </div>
 </section>
 
@@ -654,7 +644,7 @@ section[id]{scroll-margin-top:64px}
       <div class="socials" id="foot-socials"></div>
     </div>
     <ul class="foot-links">
-      <li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#formacion">Formación</a></li><li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li><li><a href="#experiencia">Experiencia</a></li>
       <li><a href="#proyectos">Proyectos</a></li><li><a href="#un-rato-de-futbol">Un Rato de Fútbol</a></li><li><a href="#contacto">Contacto</a></li>
     </ul>
     <small>© 2026 Nicolás De Los Santos. Todos los derechos reservados.</small>
@@ -788,7 +778,7 @@ $('#udf-photo > *').style.height = '100%';
 
 /* FORMACION */
 const listOrSlot = (arr, ph) => arr && arr.length ? `<ul>${arr.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>` : `<ul><li style="padding-left:0">${todo(ph)}</li></ul>`;
-$('#tl').innerHTML = DATA.formacion.map(f => `
+if ($('#tl')) $('#tl').innerHTML = DATA.formacion.map(f => `
   <article class="tl-item rv">
     <div><div class="tl-tag">${esc(f.etapa)}</div><h3>${esc(f.titulo)}</h3>
       <div class="when">${val(f.fecha,'Agregar año')}</div>
