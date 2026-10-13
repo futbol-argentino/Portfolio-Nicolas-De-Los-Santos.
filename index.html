@@ -274,17 +274,21 @@ section[id]{scroll-margin-top:64px}
 .u-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
 .u-intro p{font-size:clamp(18px,1.9vw,21px);max-width:56ch;margin-top:18px}
 .u-intro p:first-child{margin-top:0;font-size:clamp(24px,3vw,36px);font-weight:600;line-height:1.25}
+.u-logo{width:100%;height:100%;display:grid;place-items:center;padding:clamp(18px,4vw,44px);position:relative;overflow:hidden;background:radial-gradient(60% 70% at 50% 55%,rgba(138,28,48,.38),transparent 72%),linear-gradient(160deg,#2B4A94 0%,#1B3170 100%)}
+.u-logo::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(241,232,212,.22)}
+.u-logo::after{content:"";position:absolute;left:50%;top:50%;width:34%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid rgba(241,232,212,.22);border-radius:50%}
+.u-logo img{position:relative;z-index:1;width:100%;max-width:520px;height:auto;display:block}
 .u-photo{aspect-ratio:4/3;position:relative;box-shadow:12px 12px 0 var(--c-bordo)}
 .u-photo .slot,.u-photo img{width:100%;height:100%;object-fit:cover}
 @media(max-width:860px){.u-intro{grid-template-columns:1fr}}
 .do-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:3px solid var(--c-ink);background:var(--c-ink)}
-.do{background:var(--c-cream);padding:28px 24px 30px;display:flex;flex-direction:column;gap:12px;border-right:3px solid var(--c-ink);transition:background .3s,color .3s;min-height:280px}
+.do{background:var(--c-cream);padding:30px 22px 32px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;border-right:3px solid var(--c-ink);transition:background .3s,color .3s;min-height:250px}
 .do:last-child{border-right:0}
 .do:hover{background:var(--c-navy);color:var(--c-cream)}
 .do svg{width:38px;height:38px;color:var(--c-bordo);stroke-width:2}
 .do:hover svg{color:var(--c-cream)}
-.do h4{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.4vw,30px);line-height:1}
-.do p{font-size:16px;margin-top:auto}
+.do h4{font-family:var(--f-slab);font-weight:400;text-transform:uppercase;font-size:clamp(17px,1.6vw,22px);line-height:1.05;min-height:2.1em;display:flex;align-items:center;justify-content:center;width:100%}
+.do p{font-size:16px;margin-top:0;max-width:26ch}
 @media(max-width:1000px){.do-grid{grid-template-columns:1fr 1fr}.do:nth-child(2){border-right:0}.do:nth-child(-n+2){border-bottom:3px solid var(--c-ink)}}
 @media(max-width:560px){.do-grid{grid-template-columns:1fr}.do{border-right:0;border-bottom:3px solid var(--c-ink);min-height:0}.do:last-child{border-bottom:0}}
 .role-wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
@@ -718,7 +722,8 @@ const DATA = {
   cv: "",                          // link a tu CV (PDF)
   fotoHero: "foto-nicolas.png",    // foto de portada
   fotoSobreMi: "foto-nicolas.png", // foto personal para "Sobre mí"
-  fotoUdf: "",                     // foto principal de Un Rato de Fútbol
+  fotoUdf: "",                     // foto principal de Un Rato de Fútbol (si la cargás, reemplaza al logo)
+  logoUdf: "logo-urdf.png",        // logo que se muestra en el lugar de la foto
 
   // Tus redes personales / profesionales
   redes: { instagram: "nicodls_1711", x: "nicodls1711", tiktok: "nicodls1711", linkedin: "" },  // solo el usuario, sin @
@@ -889,7 +894,7 @@ $('#foot-socials').innerHTML = mine.map(pill).join('');
 /* SOBRE MI / UDF fotos */
 $('#about-photo').innerHTML = DATA.fotoSobreMi ? img(DATA.fotoSobreMi, 'Foto personal de Nicolás') : slot('Tu foto personal', 'Vertical 4:5. Una en la que te sientas cómodo', '4/5');
 $('#about-photo > *').style.height = '100%';
-$('#udf-photo').innerHTML = DATA.fotoUdf ? img(DATA.fotoUdf, 'Un Rato de Fútbol') : slot('Foto de Un Rato de Fútbol', 'Una imagen del equipo, de una transmisión o de un estadio', '4/3');
+$('#udf-photo').innerHTML = DATA.fotoUdf ? img(DATA.fotoUdf, 'Un Rato de Fútbol') : DATA.logoUdf ? `<div class="u-logo"><img src="${esc(DATA.logoUdf)}" alt="Logo de Un Rato de Fútbol"></div>` : slot('Foto de Un Rato de Fútbol', 'Una imagen del equipo, de una transmisión o de un estadio', '4/3');
 $('#udf-photo > *').style.height = '100%';
 
 /* FORMACION */
