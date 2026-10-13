@@ -315,6 +315,13 @@ section[id]{scroll-margin-top:64px}
 .iv-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--c-bordo)}
 .iv-b p{font-size:15.5px}
 .iv-b .btn{margin-top:auto;align-self:flex-start;padding:11px 18px;font-size:15px}
+.iv-grid.uno{grid-template-columns:1fr}
+.iv-grid.uno .iv{flex-direction:row}
+.iv-grid.uno .iv img{width:58%;flex:none;height:auto;aspect-ratio:16/9;align-self:stretch;border-bottom:0;border-right:3px solid var(--c-ink)}
+.iv-grid.uno .iv-b{justify-content:center;padding:clamp(22px,3vw,40px);gap:10px}
+.iv-grid.uno .iv-b h4{font-size:clamp(32px,4vw,52px)}
+.iv-grid.uno .iv-b p{font-size:17px}
+@media(max-width:760px){.iv-grid.uno .iv{flex-direction:column}.iv-grid.uno .iv img{width:100%;border-right:0;border-bottom:3px solid var(--c-ink)}}
 @media(max-width:900px){.iv-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:580px){.iv-grid{grid-template-columns:1fr}}
 .cv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
@@ -828,7 +835,11 @@ const DATA = {
   ],
 
   // Entrevistas: { nombre, rol, fecha, descripcion, foto, link }
-  entrevistas: [],
+  entrevistas: [
+    { nombre: "Marcelo Goux", rol: "", fecha: "28 de agosto de 2026",
+      descripcion: "Exjugador de fútbol profesional con casi 20 años de trayectoria, jugó en equipos como Colón, Gimnasia LP, etc.",
+      foto: "entrevista-goux.jpg", link: "https://youtu.be/bQdKMZMCVkc?si=hpVysW8eu17dF-iM" }
+  ],
 
   // Coberturas: { evento, clubes, fecha, rol, foto }
   coberturas: [],
@@ -949,11 +960,12 @@ $('#role-ph').innerHTML = rp.length ? rp.map((f,i) => img(f, rolAlt[i] || 'Traba
 
 /* UDF: entrevistas */
 const ivs = DATA.entrevistas.length ? DATA.entrevistas : [{},{},{}];
+$('#iv').classList.toggle('uno', ivs.length === 1);
 $('#iv').innerHTML = ivs.map(e => `
   <article class="iv rv">
     ${e.foto?img(e.foto,e.nombre):slot('Foto de la entrevista','Agregar imagen','4/3')}
     <div class="iv-b">
-      <div class="iv-meta"><span>${val(e.rol,'Rol o profesión')}</span><span>${val(e.fecha,'Fecha')}</span></div>
+      <div class="iv-meta">${e.nombre&&!e.rol?'':`<span>${val(e.rol,'Rol o profesión')}</span>`}<span>${val(e.fecha,'Fecha')}</span></div>
       <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
       <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
       ${e.link?`<a class="btn btn-dark" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}
