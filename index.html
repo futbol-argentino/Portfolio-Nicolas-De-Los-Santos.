@@ -371,10 +371,13 @@ section[id]{scroll-margin-top:64px}
 .rs b{font-family:var(--f-slab);font-weight:400;font-size:28px;text-transform:uppercase;line-height:1}
 .rs span{font-size:16px;opacity:.85;word-break:break-word}
 .rs em{font-style:normal;display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:15px}
-.rs em svg{width:18px;height:18px;transition:transform .25s}
+.rs em svg,.rs em svg.ico{width:18px;height:18px;margin:0;stroke-width:2;transition:transform .25s}
 .rs:hover em svg{transform:translateX(6px)}
-@media(max-width:1000px){.rs-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.rs-grid{grid-template-columns:1fr}}
+.rs-grid.tres{grid-template-columns:repeat(3,minmax(0,1fr))}
+.proj .rs{background:var(--p-ink);color:var(--p-bg)}
+.proj .rs:hover{background:var(--p-ac)}
+@media(max-width:1000px){.rs-grid,.rs-grid.tres{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.rs-grid,.rs-grid.tres{grid-template-columns:1fr}}
 
 /* ---------- SECCIONES DE PROYECTO ---------- */
 .proj{background:var(--p-bg);color:var(--p-ink);padding-block:clamp(72px,10vw,120px)}
@@ -821,11 +824,11 @@ const DATA = {
           foto: "pm-ponce.jpg", link: "https://youtu.be/5hYQ_bjp2Wk?si=9H7fYsZS6e5deYup" }
       ],
       sinFotos: true,  // este proyecto no lleva sección de fotos
-      tituloLinks: "Dónde verlo", subLinks: "Redes y canales",
-      links: [         // { label, url, icono }
-        { label: "Instagram @post__partido", url: "https://www.instagram.com/post__partido/", icono: "instagram" },
-        { label: "TikTok @post__partido", url: "https://www.tiktok.com/@post__partido", icono: "tiktok" },
-        { label: "YouTube @PostPartidoYT", url: "https://www.youtube.com/@PostPartidoYT", icono: "youtube" }
+      tituloRedes: "Seguinos", subRedes: "Redes de Post Partido",
+      redes: [         // { k: "instagram|tiktok|youtube|kick", n: nombre, user, url }
+        { k: "instagram", n: "Instagram", user: "@post__partido", url: "https://www.instagram.com/post__partido/" },
+        { k: "tiktok",    n: "TikTok",    user: "@post__partido", url: "https://www.tiktok.com/@post__partido" },
+        { k: "youtube",   n: "YouTube",   user: "@PostPartidoYT", url: "https://www.youtube.com/@PostPartidoYT" }
       ]
     }
     ,{ id: "base-de-datos", nombre: "Base de Datos del Fútbol Argentino", anios: "2026", logo: "base-datos.png",
@@ -1096,7 +1099,8 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
             <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
             ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>`:''}
       ${d.sinFotos?'':`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos">${fotos}</div></div>`}
-      <div class="rv"><div class="proj-h"><h3>${esc(d.tituloLinks||'Dónde verlo')}</h3><span>${esc(d.subLinks||'Redes y canales')}</span></div><div class="proj-links">${links}</div></div>
+      ${d.redes&&d.redes.length?`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloRedes||'Seguinos')}</h3><span>${esc(d.subRedes||'Redes')}</span></div>
+        <div class="rs-grid${d.redes.length===3?' tres':''}">${d.redes.map(r=>`<a class="rs" href="${esc(r.url)}" target="_blank" rel="noopener">${ico(r.k)}<b>${esc(r.n)}</b><span>${esc(r.user)}</span><em>Abrir ${ico('arrow')}</em></a>`).join('')}</div></div>`:`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloLinks||'Dónde verlo')}</h3><span>${esc(d.subLinks||'Redes y canales')}</span></div><div class="proj-links">${links}</div></div>`}
       <a class="proj-back" href="#experiencia">${ico('arrow')} Volver a Experiencia</a>
     </div></section>`;
 }).join('');
