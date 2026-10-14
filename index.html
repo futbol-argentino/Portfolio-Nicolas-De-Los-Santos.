@@ -415,14 +415,15 @@ section[id]{scroll-margin-top:64px}
 .proj-ep:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--p-ac)}
 .proj-ep .slot,.proj-ep img{aspect-ratio:16/9;width:100%;object-fit:cover;border-width:0 0 3px 0;border-style:solid;border-color:var(--p-ink)}
 .proj-ep-b{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.proj-ep-b .m{display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
+.proj-ep-b .m{display:flex;flex-direction:column;gap:2px;font-family:var(--f-display);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
 .proj-ep-b h4{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:28px;line-height:1}
 .proj-ep-b .btn{margin-top:auto;align-self:flex-start;padding:11px 18px;font-size:15px;background:var(--p-ink);color:var(--p-bg)}
 .proj-ep-b .btn:hover{background:var(--p-ac);color:var(--p-bg)}
 .proj-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .proj-photos .slot,.proj-photos img{aspect-ratio:4/3;width:100%;object-fit:cover}
 .proj-links{display:flex;flex-wrap:wrap;gap:12px}
-.proj-links .btn{background:var(--p-ink);color:var(--p-bg);padding:13px 22px;font-size:16px}
+.proj-links .btn{display:inline-flex;align-items:center;gap:10px;background:var(--p-ink);color:var(--p-bg);padding:13px 22px;font-size:16px}
+.proj-links .btn .ico{width:20px;height:20px;flex:none}
 .proj-links .btn:hover{background:var(--p-ac);color:var(--p-bg)}
 .proj-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:16px;text-decoration:none;border-bottom:2px solid var(--p-ac);padding-bottom:3px;justify-self:start}
 .proj-back svg{width:18px;height:18px;transform:rotate(180deg);transition:transform .25s}
@@ -819,8 +820,13 @@ const DATA = {
           descripcion: "Uno de los pilotos más prestigiosos de la actualidad, hoy en TC2000, con gran trayectoria en el automovilismo nacional. Tricampeón de TC2000.",
           foto: "pm-ponce.jpg", link: "https://youtu.be/5hYQ_bjp2Wk?si=9H7fYsZS6e5deYup" }
       ],
-      fotos: [],       // ["foto1.jpg", ...]
-      links: []        // { label: "YouTube", url: "https://..." }
+      sinFotos: true,  // este proyecto no lleva sección de fotos
+      tituloLinks: "Dónde verlo", subLinks: "Redes y canales",
+      links: [         // { label, url, icono }
+        { label: "Instagram @post__partido", url: "https://www.instagram.com/post__partido/", icono: "instagram" },
+        { label: "TikTok @post__partido", url: "https://www.tiktok.com/@post__partido", icono: "tiktok" },
+        { label: "YouTube @PostPartidoYT", url: "https://www.youtube.com/@PostPartidoYT", icono: "youtube" }
+      ]
     }
     ,{ id: "base-de-datos", nombre: "Base de Datos del Fútbol Argentino", anios: "2026", logo: "base-datos.png",
       tema: { bg: "#0E122D", ink: "#EAF2FF", ac: "#4DA3E0" },
@@ -1064,7 +1070,7 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
   const eps = (d.episodios && d.episodios.length) ? d.episodios : [{},{},{}];
   const conEps = d.episodios !== false;
   const fotos = [0,1,2,3].map(i => (d.fotos||[])[i] ? img(d.fotos[i], d.nombre) : slot('Foto','Agregar imagen')).join('');
-  const links = (d.links && d.links.length) ? d.links.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${ico('arrow')}</a>`).join('') : todo('Agregar link');
+  const links = (d.links && d.links.length) ? d.links.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${l.icono?ico(l.icono):''}${esc(l.label)} ${ico('arrow')}</a>`).join('') : todo('Agregar link');
   return `<section id="${esc(d.id)}" class="proj" style="--p-bg:${t.bg||'#F1E8D4'};--p-ink:${t.ink||'#0E1B3D'};--p-ac:${t.ac||'#B9472F'}">
     <div class="wrap">
       <div class="proj-mast">
@@ -1089,7 +1095,7 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
             <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
             <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
             ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>`:''}
-      <div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos">${fotos}</div></div>
+      ${d.sinFotos?'':`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos">${fotos}</div></div>`}
       <div class="rv"><div class="proj-h"><h3>${esc(d.tituloLinks||'Dónde verlo')}</h3><span>${esc(d.subLinks||'Redes y canales')}</span></div><div class="proj-links">${links}</div></div>
       <a class="proj-back" href="#experiencia">${ico('arrow')} Volver a Experiencia</a>
     </div></section>`;
