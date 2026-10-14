@@ -176,6 +176,10 @@ section[id]{scroll-margin-top:64px}
 .story-body p:first-child::first-letter{font-family:var(--f-display);font-weight:900;float:left;font-size:4.6em;line-height:.78;padding:6px 12px 0 0;color:var(--red)}
 .story-body blockquote{margin:40px 0 0;padding:6px 0 6px 26px;border-left:6px solid var(--red);font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(28px,3.6vw,46px);line-height:1.02;letter-spacing:.01em;text-wrap:balance}
 @media(max-width:900px){.story-grid{grid-template-columns:1fr}.story-head{position:static}}
+.diff-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.diff-text{padding-left:clamp(20px,2.6vw,32px);border-left:6px solid var(--red)}
+.diff-text p{font-size:clamp(18px,1.9vw,21px);line-height:1.7;color:#26314D;max-width:62ch}
+@media(max-width:900px){.diff-grid{grid-template-columns:1fr}}
 
 /* ---------- FORMACION ---------- */
 .tl{position:relative;display:grid;gap:22px;padding-left:34px}
@@ -583,6 +587,19 @@ section[id]{scroll-margin-top:64px}
           <div class="trait"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6z"/><path d="M8.500 12.200l2.500 2.500 4.500-5"/></svg><h3>Comprometido</h3><p>Preparo cada trabajo como si fuera el más importante.</p></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2a. MI DIFERENCIAL -->
+<section id="mi-diferencial" class="sec light on-l">
+  <div class="wrap diff-grid">
+    <div class="rv">
+      <span class="eyebrow" style="color:var(--bordo)">Lo que me distingue</span>
+      <h2 class="h2">Mi diferencial</h2>
+    </div>
+    <div class="diff-text rv">
+      <p>Mi diferencial está en combinar la pasión por el deporte con la creatividad, la investigación y la capacidad de desarrollar proyectos propios. Desde Un Rato de Fútbol y Post Partido hasta la creación de una base de datos del fútbol argentino, busco explorar distintas formas de comunicar, analizar y acercar el fútbol a las personas. Me caracteriza una mirada inquieta, con iniciativa para transformar ideas en contenidos concretos y el interés por ir más allá de los resultados, descubriendo las historias, los datos y las emociones que hacen único al deporte.</p>
     </div>
   </div>
 </section>
