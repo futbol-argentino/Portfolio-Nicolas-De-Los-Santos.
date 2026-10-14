@@ -485,6 +485,7 @@ section[id]{scroll-margin-top:64px}
 
 /* ---------- CONTACTO ---------- */
 .ct{background:radial-gradient(800px 420px at 10% 0%,rgba(212,42,60,.2),transparent 60%),var(--navy)}
+.ct .h2{font-size:clamp(40px,min(6.2vw,5.4vw + 6px),76px);overflow-wrap:normal;line-height:1.04}
 .ct-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,88px);align-items:start}
 .ct-list{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:0}
 .ct-list li{display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid var(--line-d)}
@@ -683,25 +684,6 @@ section[id]{scroll-margin-top:64px}
   </div>
 </section>
 
-<!-- 8. PORTFOLIO MULTIMEDIA -->
-<section id="portfolio" class="sec dark">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Portfolio multimedia</span><h2 class="h2">Galería</h2>
-      <p class="lead">Fotos, videos, entrevistas, transmisiones, reels y trabajos periodísticos en un solo lugar.</p></div>
-    <div class="filters" id="filters" role="group" aria-label="Filtrar galería"></div>
-    <div class="gal" id="gal"></div>
-    <p class="gal-note" id="gal-note"></p>
-  </div>
-</section>
-
-<!-- 9. EVOLUCION -->
-<section id="evolucion" class="sec light on-l">
-  <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow" style="color:var(--bordo)">Mi camino</span><h2 class="h2">De dónde vengo y hacia dónde voy</h2></div>
-    <div class="ev rv" id="ev"></div>
-  </div>
-</section>
-
 <!-- 10. CONTACTO -->
 <section id="contacto" class="sec ct">
   <div class="wrap">
@@ -709,7 +691,7 @@ section[id]{scroll-margin-top:64px}
       <div class="rv">
         <span class="eyebrow">Contacto</span>
         <h2 class="h2">¿Trabajamos juntos?</h2>
-        <p class="lead" style="margin-top:22px">Medios, clubes, productoras, periodistas y proyectos deportivos: si tienen una idea o una cobertura en mente, escríbanme y la charlamos.</p>
+        <p class="lead" style="margin-top:22px">Medios, clubes, productoras, periodistas y proyectos deportivos: si tenés una idea o una cobertura en mente, contactate conmigo.</p>
         <ul class="ct-list" id="ct-list"></ul>
       </div>
       <form class="form rv" id="form" novalidate>
@@ -898,17 +880,6 @@ const DATA = {
     { n:7, a:"Argentina", ca:"ar", b:"Suiza", cb:"ch", fecha:"2026-07-11", fase:"Mundial 2026 · 4tos de final", link:"https://www.youtube.com/live/rAWM0nblZrY?si=rhiIeiQNzW9uxflT" },
     { n:8, a:"Francia", ca:"fr", b:"España", cb:"es", fecha:"2026-07-14", fase:"Mundial 2026 · Semifinal", link:"https://www.youtube.com/live/w2gQKA7TDxA?si=QG8DbAxozYWJdHTW" },
     { n:9, a:"Argentina", ca:"ar", b:"Inglaterra", cb:"gb-eng", fecha:"2026-07-15", fase:"Mundial 2026 · Semifinal", link:"https://www.youtube.com/live/q7cPQr643qA?si=u747TVqDqFG4W3N7" }
-  ],
-
-  // Galería: { cat: "PERIODISMO|ENTREVISTAS|TRANSMISIONES|REDES|PROYECTOS", tipo: "foto|video", src: "archivo.jpg", titulo: "", link: "" }
-  galeria: [],
-
-  // Evolución
-  evolucion: [
-    { titulo: "Dónde empecé", cuando: "", texto: "" },
-    { titulo: "Dónde estoy", cuando: "Hoy", texto: "Estudio Periodismo Deportivo y participo en Un Rato de Fútbol." },
-    { titulo: "Lo que construyo", cuando: "En marcha", texto: "Entrevistas, coberturas y contenido que suman práctica real en cada paso." },
-    { titulo: "Hacia dónde voy", cuando: "Próximo", texto: "Quiero seguir creciendo dentro de los medios deportivos: transmitir, entrevistar y contar más historias." }
   ]
 };
 /* ================================ FIN ZONA EDITABLE ================================ */
@@ -1116,40 +1087,9 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
 const SK = [
   ['Periodismo',['Redacción periodística','Investigación','Entrevistas','Análisis deportivo','Cobertura']],
   ['Producción',['Producción de programas','Producción audiovisual','Transmisiones','Organización de contenidos']],
-  ['Digital',['Redes sociales','Creación de contenido','Edición','Comunicación digital']]
+  ['Digital',['Redes sociales','Creación de contenido','Edición','Comunicación digital','Creación de páginas web']]
 ];
 $('#sk').innerHTML = SK.map(([t,l]) => `<div class="sk"><h3>${t}</h3><ul>${l.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
-
-/* GALERIA */
-const CATS = ['TODO','PERIODISMO','ENTREVISTAS','TRANSMISIONES','REDES','PROYECTOS'];
-const shapes = ['','tall','','wide','','','tall','','wide','','',''];
-const phCats = ['PERIODISMO','ENTREVISTAS','TRANSMISIONES','REDES','PROYECTOS','ENTREVISTAS','TRANSMISIONES','PERIODISMO','REDES','PROYECTOS','TRANSMISIONES','ENTREVISTAS'];
-const hasGal = DATA.galeria.length > 0;
-const items = hasGal ? DATA.galeria : phCats.map(c => ({cat:c, ph:true}));
-let cur = 'TODO';
-function renderGal() {
-  const html = items.map((g,i) => {
-    const show = cur==='TODO' || g.cat===cur;
-    const inner = g.ph ? slot('Espacio libre', `Para ${g.cat.toLowerCase()}`) : (g.link ? `<a href="${esc(g.link)}" target="_blank" rel="noopener" style="display:block;position:absolute;inset:0" aria-label="${esc(g.titulo||g.cat)}">${img(g.src,g.titulo)}</a>` : img(g.src,g.titulo));
-    return `<div class="gi ${shapes[i%shapes.length]}" data-cat="${g.cat}" ${show?'':'hidden'}>${inner}<span class="gi-tag">${g.tipo==='video'?'Video · ':''}${g.cat}</span></div>`;
-  }).join('');
-  $('#gal').innerHTML = html;
-  $('#gal-note').textContent = hasGal ? '' : 'Espacios listos para tus fotos, videos, capturas de transmisiones, reels y trabajos. Los filtros ya funcionan.';
-}
-$('#filters').innerHTML = CATS.map(c => `<button class="fbtn" type="button" data-c="${c}" aria-pressed="${c==='TODO'}">${c}</button>`).join('');
-$('#filters').addEventListener('click', e => {
-  const b = e.target.closest('.fbtn'); if(!b) return;
-  cur = b.dataset.c;
-  document.querySelectorAll('.fbtn').forEach(x => x.setAttribute('aria-pressed', x===b));
-  renderGal();
-});
-renderGal();
-
-/* EVOLUCION */
-$('#ev').innerHTML = DATA.evolucion.map((e,i,a) => `
-  <div class="ev-i${i===a.length-1?' next':''}"><h3>${esc(e.titulo)}</h3>
-  <div class="when">${val(e.cuando,'Agregar fecha')}</div>
-  <p>${e.texto?esc(e.texto):todo('Contar esta etapa')}</p></div>`).join('');
 
 /* CONTACTO */
 async function copyText(t, btn) {
