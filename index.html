@@ -402,7 +402,7 @@ section[id]{scroll-margin-top:64px}
 .proj-route{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(12px,3vw,32px);align-items:stretch}
 .proj-stop{border:3px solid var(--p-ink);padding:clamp(20px,3vw,34px);display:flex;flex-direction:column;gap:8px;justify-content:center}
 .proj-stop span{font-family:var(--f-display);font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--p-ac)}
-.proj-stop b{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(32px,5vw,64px);line-height:.95}
+.proj-stop b{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(26px,3.6vw,52px);line-height:.95;white-space:nowrap}
 .proj-stop.fin{background:var(--p-ac);border-color:var(--p-ac);color:var(--p-bg)}
 .proj-stop.fin span{color:var(--p-bg);opacity:.85}
 .proj-arrow{display:grid;place-items:center}
@@ -862,8 +862,10 @@ const DATA = {
                { rol: "Redactor de noticias", texto: "Escribo las noticias del automovilismo." } ],
       episodios: false,
       tituloChico: true, logoAncho: true,
-      tituloFotos: "Capturas", subFotos: "La página por dentro", fotos: [],
-      tituloLinks: "Entrar a Línea de Boxes", subLinks: "Enlace", links: []
+      tituloFotos: "Capturas", subFotos: "La página por dentro", fotosGrandes: true,
+      fotos: ["lb-inicio.jpg","lb-formula1.jpg","lb-colapinto.jpg","lb-motogp.jpg"],
+      tituloLinks: "Entrar a Línea de Boxes", subLinks: "Enlace",
+      links: [ { label: "Abrir la página", url: "https://futbol-argentino.github.io/linea-de-boxes-/#" } ]
     }
   ],
 
