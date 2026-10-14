@@ -424,6 +424,9 @@ section[id]{scroll-margin-top:64px}
 .proj-ep-b .btn:hover{background:var(--p-ac);color:var(--p-bg)}
 .proj-photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .proj-photos .slot,.proj-photos img{aspect-ratio:4/3;width:100%;object-fit:cover}
+.proj-photos.grandes{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.proj-photos.grandes img{aspect-ratio:1918/990;border:3px solid var(--p-ink);box-shadow:6px 6px 0 var(--p-ac)}
+@media(max-width:700px){.proj-photos.grandes{grid-template-columns:1fr}}
 .proj-links{display:flex;flex-wrap:wrap;gap:12px}
 .proj-links .btn{display:inline-flex;align-items:center;gap:10px;background:var(--p-ink);color:var(--p-bg);padding:13px 22px;font-size:16px}
 .proj-links .btn .ico{width:20px;height:20px;flex:none}
@@ -824,7 +827,7 @@ const DATA = {
           foto: "pm-ponce.jpg", link: "https://youtu.be/5hYQ_bjp2Wk?si=9H7fYsZS6e5deYup" }
       ],
       sinFotos: true,  // este proyecto no lleva sección de fotos
-      tituloRedes: "Seguinos", subRedes: "Redes de Post Partido",
+      tituloRedes: "Dónde verlo", subRedes: "Redes y canales",
       redes: [         // { k: "instagram|tiktok|youtube|kick", n: nombre, user, url }
         { k: "instagram", n: "Instagram", user: "@post__partido", url: "https://www.instagram.com/post__partido/" },
         { k: "tiktok",    n: "TikTok",    user: "@post__partido", url: "https://www.tiktok.com/@post__partido" },
@@ -841,8 +844,10 @@ const DATA = {
                { rol: "Investigación", texto: "Investigo cada dato que se suma a la base." } ],
       episodios: false,                       // este proyecto no lleva entrevistas
       tituloChico: true, logoAncho: true,     // nombre largo y logo apaisado
-      tituloFotos: "Capturas", subFotos: "La página por dentro", fotos: [],
-      tituloLinks: "Entrar a la base de datos", subLinks: "Enlace", links: []
+      tituloFotos: "Capturas", subFotos: "La página por dentro", fotosGrandes: true,
+      fotos: ["bd-hoy.jpg","bd-campeones.jpg","bd-estadios.jpg","bd-jugadores.jpg"],
+      tituloLinks: "Entrar a la base de datos", subLinks: "Enlace",
+      links: [ { label: "Abrir la página", url: "https://futbol-argentino.github.io/futbol-argentino/" } ]
     },
     { id: "linea-de-boxes", nombre: "Línea de Boxes", anios: "2026", logo: "linea-de-boxes.png",
       tema: { bg: "#07080A", ink: "#F2EFE8", ac: "#E10B17" },
@@ -1098,7 +1103,7 @@ $('#detalles').innerHTML = (DATA.detalles||[]).map(d => {
             <h4>${val(e.nombre,'Nombre del entrevistado')}</h4>
             <p>${e.descripcion?esc(e.descripcion):todo('Breve descripción de la charla')}</p>
             ${e.link?`<a class="btn" href="${esc(e.link)}" target="_blank" rel="noopener">Ver entrevista ${ico('arrow')}</a>`:`<span class="todo" style="margin-top:auto;align-self:flex-start">Agregar link</span>`}</div></article>`).join('')}</div></div>`:''}
-      ${d.sinFotos?'':`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos">${fotos}</div></div>`}
+      ${d.sinFotos?'':`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloFotos||'Fotos')}</h3><span>${esc(d.subFotos||'Detrás de cámara')}</span></div><div class="proj-photos${d.fotosGrandes?' grandes':''}">${fotos}</div></div>`}
       ${d.redes&&d.redes.length?`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloRedes||'Seguinos')}</h3><span>${esc(d.subRedes||'Redes')}</span></div>
         <div class="rs-grid${d.redes.length===3?' tres':''}">${d.redes.map(r=>`<a class="rs" href="${esc(r.url)}" target="_blank" rel="noopener">${ico(r.k)}<b>${esc(r.n)}</b><span>${esc(r.user)}</span><em>Abrir ${ico('arrow')}</em></a>`).join('')}</div></div>`:`<div class="rv"><div class="proj-h"><h3>${esc(d.tituloLinks||'Dónde verlo')}</h3><span>${esc(d.subLinks||'Redes y canales')}</span></div><div class="proj-links">${links}</div></div>`}
       <a class="proj-back" href="#experiencia">${ico('arrow')} Volver a Experiencia</a>
